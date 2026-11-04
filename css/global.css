@@ -1,7 +1,112 @@
+/* 全站基础。配色取自效果图：宣纸底、绛红、泥金。 */
+:root {
+    --paper: #e7d3a8;
+    --card: #f7ecd0;
+    --card-2: #fbf6e8;
+    --ink: #3a2a1e;
+    --muted: #5c4636;
+    --red: #8b3a32;
+    --red-deep: #732f29;
+    --gold: #c4a15a;
+    --line: #b98b3d;
+    --nav-h: 76px;
+    --shadow: 0 12px 28px rgba(80, 48, 20, 0.12);
+}
 
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--paper:#e4d2a5;--ink:#33251b;--red:#813b32;--brown:#60412b;--gold:#b18a4a}
-body{font-family:"Microsoft YaHei","STKaiti",serif;color:var(--ink);background:var(--paper);overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;background:url("../assets/images/decorate/biankuang.png") center/cover no-repeat;opacity:.08;pointer-events:none}
-a{text-decoration:none;color:inherit}button{font-family:inherit;cursor:pointer}
-.section-title{color:var(--red)}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "KaiTi", "STKaiti", "Songti SC", "STSong", "SimSun", "WenQuanYi Micro Hei", "Microsoft YaHei", serif;
+    color: var(--ink);
+    background: var(--paper);
+    overflow-x: hidden;
+    line-height: 1.65;
+}
+
+/* 极淡的边框纹样，不拦截点击 */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: url("../assets/images/decorate/biankuang.jpg") center / cover no-repeat;
+    opacity: 0.07;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* 墨点层在内容之上，但 pointer-events 关闭，避免挡住棋子和算珠 */
+#inkParticle {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 12;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+main {
+    position: relative;
+    z-index: 1;
+}
+
+.page-plain,
+.page-pattern {
+    min-height: 100vh;
+    padding: calc(var(--nav-h) + 32px) clamp(16px, 5vw, 72px) 72px;
+}
+
+.page-plain {
+    background: #e7d3a8;
+}
+
+.page-pattern {
+    background-color: #e8d4aa;
+    background-image:
+        linear-gradient(rgba(232, 212, 170, 0.9), rgba(232, 212, 170, 0.94)),
+        url("../assets/images/decorate/wenyang.jpg");
+    background-size: auto, 460px;
+}
+
+.eyebrow {
+    color: var(--red);
+    font-size: clamp(16px, 2vw, 20px);
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+}
+
+@media (max-width: 920px) {
+    :root {
+        --nav-h: 64px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}

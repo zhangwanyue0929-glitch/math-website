@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <title>数学经典 - 算经千年</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/navbar.css">
@@ -10,8 +11,11 @@
 </head>
 <body>
 <header class="navbar">
-    <div class="logo">算经千年</div>
-    <nav>
+    <a class="logo" href="index.html">算经千年</a>
+    <button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+    <nav aria-label="主导航">
         <a href="index.html">首页</a>
         <a href="history.html">发展史</a>
         <a href="mathematicians.html">数学家</a>
@@ -21,11 +25,11 @@
     </nav>
 </header>
 
-<main class="classics-page">
+<main class="classics-page page-pattern">
     <section class="classics-hero">
         <p class="eyebrow">以形释数，以数明理</p>
         <h1>古代数学经典馆</h1>
-        <p>从直角三角形到组合数列，从割圆逼近到圆周率，中国古代数学把日用测量、算法推演与严密思想连成一条清晰脉络。</p>
+        <p>从直角三角形到组合数列，从割圆逼近到圆周率，把知识讲解和互动演示放在同一个页面里。</p>
     </section>
 
     <section class="classic-container">
@@ -50,7 +54,6 @@
                 <h2 id="classic-title">勾股定理</h2>
                 <p id="classic-text"></p>
             </div>
-
             <div class="classic-grid">
                 <div id="demo-container"></div>
                 <article class="classic-article">
@@ -64,10 +67,8 @@
     </section>
 </main>
 
-<footer class="footer">
-    <p>© 2026 算经千年 · 中国古代数学文明互动博物馆</p>
-</footer>
-
+<script src="js/api.js"></script>
+<script src="js/nav.js"></script>
 <script src="js/classics.js"></script>
 <script src="js/particle.js"></script>
 </body>

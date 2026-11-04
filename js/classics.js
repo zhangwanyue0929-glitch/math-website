@@ -1,198 +1,209 @@
-const classics = {
-    gougu: {
-        kicker: "《周髀算经》与《九章算术》的测量智慧",
-        title: "勾股定理",
-        text: "中国古代把直角三角形中较短的直角边称为“勾”，较长的直角边称为“股”，斜边称为“弦”。勾股关系说明：勾平方与股平方相加，等于弦平方。",
-        detail: "勾股定理不只是纸面公式，它来自土地丈量、城墙高度、河宽距离等实际问题。古人借助矩、绳和面积拼补来理解“勾三股四弦五”等典型数组，把空间测量转化为可以计算的数。",
-        points: [
-            "把几何图形和数值计算连接起来，是古代测量术的基础工具。",
-            "可用于估算不可直接到达的距离，例如隔河测宽、登高测影。",
-            "在《九章算术》的“勾股”章中形成了成体系的问题与算法。"
-        ],
-        html: `
-            <div class="gougu-box">
-                <div class="gougu-visual" id="gouguVisual"></div>
-                <label>勾 a：<span id="aValue">3</span>
-                    <input type="range" id="aRange" min="1" max="12" value="3">
-                </label>
-                <label>股 b：<span id="bValue">4</span>
-                    <input type="range" id="bRange" min="1" max="12" value="4">
-                </label>
-                <div class="formula-card" id="result"></div>
-            </div>
-        `
-    },
-    yanghui: {
-        kicker: "《详解九章算法》中的三角垛形",
-        title: "杨辉三角",
-        text: "杨辉三角以层层相加的方式排列数字：每个内部数字都等于它肩上左右两个数字之和。它揭示了组合数、二项式展开系数与多种数列之间的关系。",
-        detail: "在中国数学传统中，这种图式常用于“开方作法”和高次方展开。它看似只是数字堆叠，实际包含了组合选择的计数思想：第 n 行的数字可解释为从 n 个对象中取 k 个的方法数。",
-        points: [
-            "每一行的和都是 2 的幂，体现二项展开的总项数。",
-            "斜列中可以读出自然数、三角数、四面体数等多种数列。",
-            "它把代数展开、组合计数和递推算法放在同一张图里。"
-        ],
-        html: `
-            <div class="pascal-control">
-                <button id="lessRows" type="button">减少行数</button>
-                <span id="rowText">当前 8 行</span>
-                <button id="moreRows" type="button">增加行数</button>
-            </div>
-            <div id="pascal"></div>
-        `
-    },
-    circle: {
-        kicker: "刘徽割圆术与圆周率逼近",
-        title: "割圆术",
-        text: "割圆术用圆内接正多边形逼近圆。边数越多，多边形周长越接近圆周长，进而得到越来越精密的圆周率估计。",
-        detail: "刘徽在注解《九章算术》时提出割圆思想，从正六边形开始不断倍增边数，以“割之弥细，所失弥少”的方式逼近圆。这个过程体现了极限思想的萌芽。",
-        points: [
-            "通过可计算的多边形周长逼近难以直接测量的曲线长度。",
-            "边数倍增后误差逐渐缩小，展示了逼近与极限的思想。",
-            "为祖冲之等后世数学家进一步精算圆周率提供了方法基础。"
-        ],
-        html: `
-            <div class="circle-demo">
-                <canvas id="circleCanvas" width="420" height="420"></canvas>
-                <label>多边形边数
-                    <input type="range" id="sideRange" min="6" max="192" step="6" value="6">
-                </label>
-                <button id="doubleSides" type="button">边数加倍</button>
-                <p id="sideText"></p>
-            </div>
-        `
-    }
-};
+/**
+ * 数学经典馆：勾股定理、杨辉三角、割圆术。
+ * 图形用 SVG，方便缩放，也方便在答辩时指出每一条边对应的量。
+ * 条目数据集中在 classics 里，以后可以从接口替换，不必改布局。
+ */
+(function () {
+    var classics = {
+        gougu: {
+            kicker: "中国古代数学实验",
+            title: "勾股定理",
+            text: "中国古代把直角三角形中较短的直角边称为“勾”，较长的直角边称为“股”，斜边称为“弦”。勾平方与股平方相加，等于弦平方。",
+            detail: "勾股定理来自土地丈量、城墙高度和河宽一类实际问题。《周髀算经》已有“勾三股四弦五”，《九章算术》勾股章则把多种测量问题收成可以计算的算法。",
+            points: [
+                "把图形和数值连在一起，是古代测量术的基本工具。",
+                "可以估算不能直接到达的距离，例如隔河测宽。",
+                "在《九章算术》“勾股”章里形成了成套的问题和算法。"
+            ],
+            html: ''
+                + '<div class="gougu-box">'
+                + '  <svg class="math-svg" id="gouguSvg" viewBox="0 0 320 230" role="img" aria-label="勾股形">'
+                + '    <polyline id="gouguShape" fill="rgba(139,58,50,0.08)" stroke="#8b3a32" stroke-width="3" stroke-linejoin="round"></polyline>'
+                + '    <polyline id="gouguRight" fill="none" stroke="#8b3a32" stroke-width="2"></polyline>'
+                + '    <text id="labelGou" fill="#8b3a32" font-size="16">勾</text>'
+                + '    <text id="labelGu" fill="#8b3a32" font-size="16">股</text>'
+                + '    <text id="labelXian" fill="#8b3a32" font-size="16">弦</text>'
+                + '  </svg>'
+                + '  <p class="diagram-caption">交互滑块 / 公式结果</p>'
+                + '  <label>勾 a <span id="aValue">3</span><input type="range" id="aRange" min="1" max="12" value="3"></label>'
+                + '  <label>股 b <span id="bValue">4</span><input type="range" id="bRange" min="1" max="12" value="4"></label>'
+                + '  <div class="formula-card" id="result"></div>'
+                + '</div>'
+        },
+        yanghui: {
+            kicker: "《详解九章算法》中的三角数表",
+            title: "杨辉三角",
+            text: "杨辉三角层层相加：每个数等于它肩上左右两数之和。它同时是组合数和二项式展开的系数表。",
+            detail: "在中国数学里，这张表常用于开方作法。第 n 行从 0 数起，第 k 个数就是从 n 个里取 k 个的方法数。",
+            points: [
+                "每一行的和都是 2 的幂。",
+                "斜着读，可以看到自然数、三角数等数列。",
+                "一张表里同时有递推、组合和二项展开。"
+            ],
+            html: ''
+                + '<div class="pascal-control">'
+                + '  <button id="lessRows" type="button">减少行数</button>'
+                + '  <span id="rowText">当前 8 行</span>'
+                + '  <button id="moreRows" type="button">增加行数</button>'
+                + '</div>'
+                + '<div id="pascal" aria-label="杨辉三角"></div>'
+        },
+        circle: {
+            kicker: "刘徽割圆术与圆周率逼近",
+            title: "割圆术",
+            text: "割圆术用圆内接正多边形逼近圆。边数越多，多边形周长越接近圆周长，得到的圆周率就越精细。",
+            detail: "刘徽注解《九章算术》时从正六边形开始，不断把边数加倍，说“割之弥细，所失弥少”。这是极限思想的早期表达。",
+            points: [
+                "用算得出的直线段去逼近曲线。",
+                "边数加倍以后，误差明显变小。",
+                "为祖冲之后来把圆周率算到小数点后七位准备了方法。"
+            ],
+            html: ''
+                + '<div class="circle-demo">'
+                + '  <svg class="math-svg" id="circleSvg" viewBox="0 0 320 320" role="img" aria-label="割圆示意">'
+                + '    <circle cx="160" cy="160" r="130" fill="none" stroke="#c6a15b" stroke-width="2"></circle>'
+                + '    <polygon id="circlePoly" fill="rgba(139,58,50,0.12)" stroke="#8b3a32" stroke-width="2"></polygon>'
+                + '  </svg>'
+                + '  <label>多边形边数 <span id="sideLabel">6</span>'
+                + '    <input type="range" id="sideRange" min="6" max="96" step="1" value="6">'
+                + '  </label>'
+                + '  <button id="doubleSides" type="button">边数加倍</button>'
+                + '  <p id="sideText"></p>'
+                + '</div>'
+        }
+    };
 
-const buttons = document.querySelectorAll(".classic-btn");
+    var buttons = document.querySelectorAll(".classic-btn");
 
-buttons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-        buttons.forEach((item) => item.classList.remove("active"));
-        btn.classList.add("active");
-        loadClassic(btn.dataset.classic);
+    buttons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+            buttons.forEach(function (item) { item.classList.remove("active"); });
+            btn.classList.add("active");
+            loadClassic(btn.dataset.classic);
+        });
     });
-});
 
-function loadClassic(key) {
-    const item = classics[key];
-    document.getElementById("classic-kicker").textContent = item.kicker;
-    document.getElementById("classic-title").textContent = item.title;
-    document.getElementById("classic-text").textContent = item.text;
-    document.getElementById("classic-detail").textContent = item.detail;
-    document.getElementById("classic-points").innerHTML = item.points
-        .map((point) => `<li>${point}</li>`)
-        .join("");
-    document.getElementById("demo-container").innerHTML = item.html;
-
-    if (key === "gougu") initGougu();
-    if (key === "yanghui") initPascal();
-    if (key === "circle") initCircle();
-}
-
-function initGougu() {
-    const aRange = document.getElementById("aRange");
-    const bRange = document.getElementById("bRange");
-    const visual = document.getElementById("gouguVisual");
-
-    function update() {
-        const a = Number(aRange.value);
-        const b = Number(bRange.value);
-        const c = Math.sqrt(a * a + b * b);
-        document.getElementById("aValue").textContent = a;
-        document.getElementById("bValue").textContent = b;
-        document.getElementById("result").textContent = `${a}² + ${b}² = ${c.toFixed(2)}²，弦长约为 ${c.toFixed(2)}`;
-        visual.style.width = `${Math.max(180, a * 22)}px`;
-        visual.style.height = `${Math.max(150, b * 18)}px`;
+    function loadClassic(key) {
+        var item = classics[key];
+        document.getElementById("classic-kicker").textContent = item.kicker;
+        document.getElementById("classic-title").textContent = item.title;
+        document.getElementById("classic-text").textContent = item.text;
+        document.getElementById("classic-detail").textContent = item.detail;
+        document.getElementById("classic-points").innerHTML = item.points.map(function (point) {
+            return "<li>" + point + "</li>";
+        }).join("");
+        document.getElementById("demo-container").innerHTML = item.html;
+        if (key === "gougu") initGougu();
+        if (key === "yanghui") initPascal();
+        if (key === "circle") initCircle();
     }
 
-    aRange.addEventListener("input", update);
-    bRange.addEventListener("input", update);
-    update();
-}
+    function initGougu() {
+        var aRange = document.getElementById("aRange");
+        var bRange = document.getElementById("bRange");
+        var shape = document.getElementById("gouguShape");
+        var right = document.getElementById("gouguRight");
 
-function initPascal() {
-    let rows = 8;
-    const container = document.getElementById("pascal");
-    const rowText = document.getElementById("rowText");
+        function update() {
+            var a = Number(aRange.value);
+            var b = Number(bRange.value);
+            var c = Math.sqrt(a * a + b * b);
+            var cText = Math.abs(c - Math.round(c)) < 1e-6 ? String(Math.round(c)) : c.toFixed(2);
+            document.getElementById("aValue").textContent = String(a);
+            document.getElementById("bValue").textContent = String(b);
+            document.getElementById("result").textContent = a + "² + " + b + "² = " + cText + "²，弦长约 " + cText;
 
-    function draw() {
-        const triangle = [];
-        container.innerHTML = "";
+            /* 直角在左下。按勾、股的比例放大，让图形铺满示意区。 */
+            var scale = Math.min(210 / b, 132 / a);
+            var x0 = 58;
+            var y0 = 164;
+            var x1 = x0 + b * scale;
+            var y1 = y0 - a * scale;
+            var mark = Math.max(10, Math.min(16, scale * 0.35));
+            shape.setAttribute("points", x0 + "," + y0 + " " + x0 + "," + y1 + " " + x1 + "," + y0 + " " + x0 + "," + y0);
+            right.setAttribute("points", (x0 + mark) + "," + y0 + " " + (x0 + mark) + "," + (y0 - mark) + " " + x0 + "," + (y0 - mark));
+            document.getElementById("labelGou").setAttribute("x", 22);
+            document.getElementById("labelGou").setAttribute("y", (y0 + y1) / 2 + 6);
+            document.getElementById("labelGu").setAttribute("x", (x0 + x1) / 2 - 8);
+            document.getElementById("labelGu").setAttribute("y", y0 + 24);
+            document.getElementById("labelXian").setAttribute("x", (x0 + x1) / 2 + 4);
+            document.getElementById("labelXian").setAttribute("y", (y0 + y1) / 2 - 8);
+        }
 
-        for (let i = 0; i < rows; i += 1) {
-            triangle[i] = [];
-            const row = document.createElement("div");
-            row.className = "pascal-row";
+        aRange.addEventListener("input", update);
+        bRange.addEventListener("input", update);
+        update();
+    }
 
-            for (let j = 0; j <= i; j += 1) {
-                triangle[i][j] = (j === 0 || j === i)
-                    ? 1
-                    : triangle[i - 1][j - 1] + triangle[i - 1][j];
-                const span = document.createElement("span");
-                span.textContent = triangle[i][j];
-                row.appendChild(span);
+    function initPascal() {
+        var rows = 8;
+        var container = document.getElementById("pascal");
+        var rowText = document.getElementById("rowText");
+
+        function draw() {
+            container.innerHTML = "";
+            var prev = [];
+            var i;
+            var j;
+            for (i = 0; i < rows; i += 1) {
+                var row = document.createElement("div");
+                row.className = "pascal-row";
+                var current = [];
+                for (j = 0; j <= i; j += 1) {
+                    var value = (j === 0 || j === i) ? 1 : prev[j - 1] + prev[j];
+                    current.push(value);
+                    var cell = document.createElement("span");
+                    cell.textContent = String(value);
+                    row.appendChild(cell);
+                }
+                prev = current;
+                container.appendChild(row);
             }
-            container.appendChild(row);
+            rowText.textContent = "当前 " + rows + " 行";
         }
-        rowText.textContent = `当前 ${rows} 行`;
+
+        document.getElementById("lessRows").addEventListener("click", function () {
+            rows = Math.max(4, rows - 1);
+            draw();
+        });
+        document.getElementById("moreRows").addEventListener("click", function () {
+            rows = Math.min(12, rows + 1);
+            draw();
+        });
+        draw();
     }
 
-    document.getElementById("lessRows").addEventListener("click", () => {
-        rows = Math.max(4, rows - 1);
-        draw();
-    });
+    function initCircle() {
+        var poly = document.getElementById("circlePoly");
+        var sideRange = document.getElementById("sideRange");
+        var sideText = document.getElementById("sideText");
 
-    document.getElementById("moreRows").addEventListener("click", () => {
-        rows = Math.min(12, rows + 1);
-        draw();
-    });
-
-    draw();
-}
-
-function initCircle() {
-    const canvas = document.getElementById("circleCanvas");
-    const ctx = canvas.getContext("2d");
-    const sideRange = document.getElementById("sideRange");
-    const sideText = document.getElementById("sideText");
-    const doubleButton = document.getElementById("doubleSides");
-
-    function draw() {
-        const sides = Number(sideRange.value);
-        const cx = canvas.width / 2;
-        const cy = canvas.height / 2;
-        const r = 145;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        ctx.beginPath();
-        ctx.arc(cx, cy, r, 0, Math.PI * 2);
-        ctx.strokeStyle = "#c6a15b";
-        ctx.lineWidth = 3;
-        ctx.stroke();
-
-        ctx.beginPath();
-        for (let i = 0; i <= sides; i += 1) {
-            const angle = -Math.PI / 2 + (Math.PI * 2 / sides) * i;
-            const x = cx + r * Math.cos(angle);
-            const y = cy + r * Math.sin(angle);
-            if (i === 0) ctx.moveTo(x, y);
-            else ctx.lineTo(x, y);
+        function draw() {
+            var sides = Number(sideRange.value);
+            var cx = 160;
+            var cy = 160;
+            var r = 130;
+            var points = [];
+            var i;
+            for (i = 0; i < sides; i += 1) {
+                var angle = -Math.PI / 2 + (Math.PI * 2 * i) / sides;
+                points.push((cx + r * Math.cos(angle)).toFixed(2) + "," + (cy + r * Math.sin(angle)).toFixed(2));
+            }
+            poly.setAttribute("points", points.join(" "));
+            /* 单位圆内接正 n 边形周长是 2n·sin(π/n)，除以直径 2，得到 π 的近似。 */
+            var piApprox = sides * Math.sin(Math.PI / sides);
+            document.getElementById("sideLabel").textContent = String(sides);
+            sideText.textContent = "当前为正 " + sides + " 边形，内接周长估得 π ≈ " + piApprox.toFixed(6)
+                + "，与圆周率相差 " + Math.abs(Math.PI - piApprox).toFixed(6) + "。";
         }
-        ctx.strokeStyle = "#8b3a32";
-        ctx.lineWidth = 2;
-        ctx.stroke();
 
-        const piApprox = sides * Math.sin(Math.PI / sides);
-        sideText.textContent = `当前为正 ${sides} 边形，内接周长估得 π ≈ ${piApprox.toFixed(6)}，与 Math.PI 相差 ${Math.abs(Math.PI - piApprox).toFixed(6)}。`;
+        sideRange.addEventListener("input", draw);
+        document.getElementById("doubleSides").addEventListener("click", function () {
+            sideRange.value = String(Math.min(96, Number(sideRange.value) * 2));
+            draw();
+        });
+        draw();
     }
 
-    sideRange.addEventListener("input", draw);
-    doubleButton.addEventListener("click", () => {
-        sideRange.value = Math.min(192, Number(sideRange.value) * 2);
-        draw();
-    });
-    draw();
-}
-
-loadClassic("gougu");
+    loadClassic("gougu");
+})();

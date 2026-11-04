@@ -1,6 +1,108 @@
+.history-page {
+    text-align: center;
+}
 
-.history-page{padding-top:120px;min-height:100vh;text-align:center;background:#e4d2a5}
-.history-title h1{font-size:60px;color:#813b32}.timeline{display:flex;justify-content:center;gap:25px;margin:70px auto}
-.history-card{padding:35px 20px;width:140px;background:#f4e8c8;border:3px solid #9b7540;cursor:pointer;box-shadow:0 5px 15px #0002}
-.history-card:hover{transform:translateY(-10px)}
-#historyDetail{width:70%;margin:auto;background:#f7e8c5;padding:40px;border:8px solid transparent;border-image:url("../assets/images/decorate/biankuang.png") 20}
+.history-title h1 {
+    color: var(--red);
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+}
+
+.history-title p {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: clamp(16px, 2vw, 22px);
+    letter-spacing: 0.06em;
+}
+
+.timeline-wrap {
+    max-width: 1080px;
+    margin: 48px auto 28px;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+}
+
+.timeline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: max-content;
+    min-width: 100%;
+    margin: 0 auto;
+    padding: 8px 4px 18px;
+}
+
+.history-card {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    width: 132px;
+    min-height: 108px;
+    padding: 18px 10px;
+    border: 2px solid var(--line);
+    border-radius: 14px;
+    background: var(--card);
+    color: var(--red);
+    font-size: 22px;
+    letter-spacing: 0.06em;
+    box-shadow: 0 8px 18px rgba(80, 48, 20, 0.08);
+}
+
+.history-card:hover,
+.history-card:focus-visible {
+    transform: translateY(-4px);
+    border-color: var(--red);
+}
+
+.history-card.is-selected {
+    background: var(--red);
+    color: #fff;
+    border-color: var(--red);
+}
+
+.era-arrow {
+    flex: 0 0 auto;
+    color: var(--gold);
+    font-size: 22px;
+    padding: 0 2px;
+}
+
+.history-detail {
+    max-width: 920px;
+    margin: 12px auto 0;
+    padding: 36px 32px;
+    text-align: center;
+    background: var(--card);
+    border: 2px solid var(--line);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+}
+
+.history-detail h2 {
+    color: var(--red);
+    font-size: clamp(26px, 3vw, 36px);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+}
+
+.history-detail p {
+    max-width: 720px;
+    margin: 16px auto 0;
+    color: var(--ink);
+    font-size: clamp(16px, 2vw, 20px);
+    line-height: 1.8;
+}
+
+@media (max-width: 720px) {
+    .history-card {
+        width: 112px;
+        min-height: 88px;
+        font-size: 18px;
+    }
+
+    .history-detail {
+        padding: 24px 18px;
+    }
+}
