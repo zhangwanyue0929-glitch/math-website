@@ -1,6 +1,61 @@
+.hero {
+    position: relative;
+    z-index: 1;
+    margin-top: var(--nav-h);
+    min-height: calc(100vh - var(--nav-h));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 48px 20px 72px;
+    background:
+        linear-gradient(rgba(16, 9, 6, 0.22), rgba(16, 9, 6, 0.4)),
+        url("../assets/images/backgrounds/hero.jpg") center 40% / cover no-repeat;
+}
 
-.hero{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;
-background:linear-gradient(#0005,#0007),url("../sucai/gudaicangshuge.jpg") center/cover}
-.hero-content h1{font-size:90px;color:#e7c46b;text-shadow:0 5px 15px #000;margin-bottom:20px}
-.hero-content p{font-size:28px;color:#fff}
-.hero-content button{margin-top:40px;padding:15px 50px;background:#8b3a32;color:#fff;border-radius:30px}
+.hero-content h1 {
+    font-size: clamp(46px, 8vw, 92px);
+    color: #e7c46b;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    line-height: 1.12;
+    text-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
+}
+
+.hero-content p {
+    margin-top: 16px;
+    font-size: clamp(16px, 2.5vw, 28px);
+    color: #fff;
+    letter-spacing: 0.14em;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.65);
+}
+
+.hero-btn {
+    display: inline-block;
+    margin-top: 36px;
+    padding: 14px 48px;
+    background: #8b3a32;
+    color: #fff;
+    border: 0;
+    border-radius: 999px;
+    font-size: 20px;
+    letter-spacing: 0.08em;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+.hero-btn:hover {
+    background: var(--red-deep);
+}
+
+@media (max-width: 600px) {
+    .hero-content h1,
+    .hero-content p {
+        letter-spacing: 0.06em;
+    }
+
+    .hero-btn {
+        margin-top: 28px;
+        padding: 12px 36px;
+        font-size: 18px;
+    }
+}

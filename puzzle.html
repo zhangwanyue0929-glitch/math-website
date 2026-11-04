@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <title>华容道 - 算经千年</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/navbar.css">
@@ -10,8 +11,11 @@
 </head>
 <body>
 <header class="navbar">
-    <div class="logo">算经千年</div>
-    <nav>
+    <a class="logo" href="index.html">算经千年</a>
+    <button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+    <nav aria-label="主导航">
         <a href="index.html">首页</a>
         <a href="history.html">发展史</a>
         <a href="mathematicians.html">数学家</a>
@@ -21,26 +25,32 @@
     </nav>
 </header>
 
-<main class="puzzle">
+<main class="puzzle-page page-pattern">
     <section class="puzzle-copy">
         <p class="eyebrow">移形换位，步步有数</p>
         <h1>智破华容道</h1>
-        <p>拖动人物棋子到相邻空格。横将只能横向移动，竖将只能纵向移动，曹操抵达底部中间出口即通关。</p>
+        <p>拖动人物棋子滑进空格。横竖都能走，只要路上是空的；一次滑动可以连过数格，记为一步。曹操抵达底部正中出口即通关。这个开局是“横刀立马”。</p>
     </section>
 
     <section class="puzzle-layout">
-        <div id="board" aria-label="华容道棋盘"></div>
+        <div class="board-shell">
+            <div id="board" aria-label="华容道棋盘"></div>
+            <div class="exit-mark" aria-hidden="true"><i></i><b>出口</b><i></i></div>
+            <p id="winBanner" class="win-banner" hidden>通关</p>
+        </div>
         <aside class="puzzle-panel">
             <div class="counter">
                 <span>步数</span>
                 <strong id="moveCount">0</strong>
             </div>
-            <p id="win">拖动棋子开始挑战。空格在棋盘底部两侧，先为曹操让出向下通道。</p>
+            <p id="win" role="status">拖动棋子开始挑战。空格在棋盘底部两侧，先为曹操让出向下通道。</p>
             <button id="restartPuzzle" type="button">重新开始</button>
         </aside>
     </section>
 </main>
 
+<script src="js/api.js"></script>
+<script src="js/nav.js"></script>
 <script src="js/puzzle.js"></script>
 <script src="js/particle.js"></script>
 </body>

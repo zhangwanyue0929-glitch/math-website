@@ -1,145 +1,166 @@
-const rods = 13;
-const rodLeft = [11.1, 17.6, 24.0, 30.5, 37.0, 43.5, 50.0, 56.5, 63.0, 69.5, 76.0, 82.5, 88.9];
-const upperHome = [18.5, 26.7];
-const upperActive = [30.2, 36.2];
-const lowerActive = [43.5, 49.6, 55.7, 61.8, 67.9];
-const lowerHome = [52.7, 60.8, 68.9, 77.0, 85.1];
+/**
+ * 传统二五珠算盘。
+ * 上珠一颗记五，下珠一颗记一；靠梁才算入读数，靠框则不计。
+ * 本页不自动进位：某一档凑满十时，由操作者向左一档拨入一颗下珠。
+ *
+ * 珠位是按算盘框图片量出来的百分比（相对整个算盘，不是相对某一档）。
+ * 上珠 index 0 靠近梁，先被拨下；下珠 index 0 也靠近梁，先被拨上。
+ * 这样拨动时珠子不会互相穿过。
+ *
+ * 早先同时监听了 click 和 pointerup，轻点会拨过去又拨回来，看起来像点不动。
+ * 现在只在 pointerup 里处理点击和拖动。
+ */
+(function () {
+    var rods = 13;
+    var rodLeft = [11.03, 17.55, 24.01, 30.53, 37.02, 43.45, 49.94, 56.40, 62.92, 69.35, 75.84, 82.33, 88.85];
+    var upperHome = [26.39, 19.70];
+    var upperActive = [30.40, 23.71];
+    var lowerHome = [53.82, 60.52, 67.21, 73.91, 80.60];
+    var lowerActive = [43.00, 49.69, 56.39, 63.08, 69.78];
+    var placeNames = ["个", "十", "百", "千", "万", "十万", "百万", "千万", "亿", "十亿", "百亿", "千亿", "万亿"];
 
-const beadLayer = document.getElementById("abacusBeads");
-const valueOutput = document.getElementById("abacusValue");
-const placeText = document.getElementById("placeText");
-const resetButton = document.getElementById("resetAbacus");
+    var beadLayer = document.getElementById("abacusBeads");
+    var valueOutput = document.getElementById("abacusValue");
+    var placeText = document.getElementById("placeText");
+    var resetButton = document.getElementById("resetAbacus");
 
-const state = Array.from({ length: rods }, () => ({
-    upper: 0,
-    lower: 0
-}));
+    var state = [];
+    var drag = null;
+    var rod;
 
-function createAbacus() {
-    for (let rod = 0; rod < rods; rod += 1) {
-        const rodEl = document.createElement("div");
-        rodEl.className = "rod";
-        rodEl.style.left = `${rodLeft[rod]}%`;
-        rodEl.dataset.rod = rod;
-        beadLayer.appendChild(rodEl);
+    for (rod = 0; rod < rods; rod += 1) {
+        state.push({ upper: 0, lower: 0 });
+    }
 
-        for (let index = 0; index < 2; index += 1) {
-            rodEl.appendChild(createBead(rod, "upper", index));
+    function createAbacus() {
+        var index;
+        for (rod = 0; rod < rods; rod += 1) {
+            for (index = 0; index < 2; index += 1) {
+                beadLayer.appendChild(createBead(rod, "upper", index));
+            }
+            for (index = 0; index < 5; index += 1) {
+                beadLayer.appendChild(createBead(rod, "lower", index));
+            }
+        }
+        updateView();
+    }
+
+    function createBead(rodIndex, type, index) {
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "bead";
+        button.dataset.rod = String(rodIndex);
+        button.dataset.type = type;
+        button.dataset.index = String(index);
+        button.style.setProperty("--x", rodLeft[rodIndex] + "%");
+        button.setAttribute("aria-label", (rodIndex + 1) + "档" + (type === "upper" ? "上珠" : "下珠") + (index + 1));
+
+        var img = document.createElement("img");
+        img.src = "assets/images/abacus/abacus-bead-paper.png";
+        img.alt = "";
+        img.draggable = false;
+        button.appendChild(img);
+
+        button.addEventListener("pointerdown", onPointerDown);
+        button.addEventListener("pointerup", onPointerUp);
+        button.addEventListener("pointercancel", onPointerUp);
+        button.addEventListener("contextmenu", function (event) { event.preventDefault(); });
+        return button;
+    }
+
+    function toggleBead(rodIndex, type, index) {
+        var active = state[rodIndex][type] > index;
+        /* 点到第几颗，就把这一侧拨到这一颗靠梁；再点一次则拨回这一颗靠框。 */
+        state[rodIndex][type] = active ? index : index + 1;
+        updateView();
+    }
+
+    function onPointerDown(event) {
+        if (event.button !== undefined && event.button !== 0) return;
+        drag = {
+            id: event.pointerId,
+            bead: event.currentTarget,
+            y: event.clientY
+        };
+        if (event.currentTarget.setPointerCapture) {
+            event.currentTarget.setPointerCapture(event.pointerId);
+        }
+        event.preventDefault();
+    }
+
+    function onPointerUp(event) {
+        if (!drag || event.pointerId !== drag.id) return;
+        var bead = drag.bead;
+        var delta = event.clientY - drag.y;
+        drag = null;
+
+        var rodIndex = Number(bead.dataset.rod);
+        var type = bead.dataset.type;
+        var index = Number(bead.dataset.index);
+
+        if (Math.abs(delta) < 10) {
+            toggleBead(rodIndex, type, index);
+            return;
         }
 
-        for (let index = 0; index < 5; index += 1) {
-            rodEl.appendChild(createBead(rod, "lower", index));
+        /* 上珠向下靠近梁，下珠向上靠近梁。拖过阈值就吸附，不必对准像素。 */
+        if (type === "upper") {
+            var upperToward = delta > 0;
+            state[rodIndex].upper = upperToward
+                ? Math.max(state[rodIndex].upper, index + 1)
+                : Math.min(state[rodIndex].upper, index);
+        } else {
+            var lowerToward = delta < 0;
+            state[rodIndex].lower = lowerToward
+                ? Math.max(state[rodIndex].lower, index + 1)
+                : Math.min(state[rodIndex].lower, index);
         }
+        updateView();
     }
 
-    updateView();
-}
+    function updateView() {
+        document.querySelectorAll(".bead").forEach(function (bead) {
+            var rodIndex = Number(bead.dataset.rod);
+            var type = bead.dataset.type;
+            var index = Number(bead.dataset.index);
+            var active = state[rodIndex][type] > index;
+            var positions = type === "upper"
+                ? (active ? upperActive : upperHome)
+                : (active ? lowerActive : lowerHome);
+            bead.classList.toggle("active", active);
+            bead.style.top = positions[index] + "%";
+        });
 
-function createBead(rod, type, index) {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "bead";
-    button.dataset.rod = rod;
-    button.dataset.type = type;
-    button.dataset.index = index;
-    button.setAttribute("aria-label", `${rod + 1}档${type === "upper" ? "上珠" : "下珠"}${index + 1}`);
+        var value = state.reduce(function (sum, rodState, index) {
+            var place = Math.pow(10, rods - index - 1);
+            return sum + (rodState.upper * 5 + rodState.lower) * place;
+        }, 0);
 
-    const img = document.createElement("img");
-    img.src = "assets/images/abacus/abacus-bead-paper.png";
-    img.alt = "";
-    button.appendChild(img);
+        valueOutput.textContent = value.toLocaleString("zh-CN");
 
-    button.addEventListener("click", () => toggleBead(rod, type, index));
-    button.addEventListener("pointerdown", startDrag);
-    return button;
-}
+        var parts = [];
+        var needCarry = false;
+        state.forEach(function (rodState, index) {
+            var digit = rodState.upper * 5 + rodState.lower;
+            if (!digit) return;
+            if (digit >= 10) needCarry = true;
+            parts.push(placeNames[rods - 1 - index] + "位 " + digit);
+        });
 
-function toggleBead(rod, type, index) {
-    if (type === "upper") {
-        const active = state[rod].upper > index;
-        state[rod].upper = active ? index : index + 1;
-    } else {
-        const active = state[rod].lower > index;
-        state[rod].lower = active ? index : index + 1;
-    }
-    updateView();
-}
-
-function startDrag(event) {
-    const bead = event.currentTarget;
-    bead.setPointerCapture(event.pointerId);
-    bead.dataset.dragStartY = event.clientY;
-    bead.addEventListener("pointerup", endDrag, { once: true });
-    bead.addEventListener("pointercancel", endDrag, { once: true });
-}
-
-function endDrag(event) {
-    const bead = event.currentTarget;
-    const rod = Number(bead.dataset.rod);
-    const type = bead.dataset.type;
-    const index = Number(bead.dataset.index);
-    const startY = Number(bead.dataset.dragStartY || event.clientY);
-    const delta = event.clientY - startY;
-
-    if (Math.abs(delta) < 8) {
-        toggleBead(rod, type, index);
-        return;
+        if (!parts.length) {
+            placeText.textContent = "各档均未拨入。";
+            return;
+        }
+        placeText.textContent = parts.join("，") + (needCarry ? "。有的档位已满十，可以向左进一。" : "。");
     }
 
-    if (type === "upper") {
-        const towardBeam = delta > 0;
-        state[rod].upper = towardBeam ? Math.max(state[rod].upper, index + 1) : Math.min(state[rod].upper, index);
-    } else {
-        const towardBeam = delta < 0;
-        state[rod].lower = towardBeam ? Math.max(state[rod].lower, index + 1) : Math.min(state[rod].lower, index);
-    }
-
-    updateView();
-}
-
-function updateView() {
-    document.querySelectorAll(".bead").forEach((bead) => {
-        const rod = Number(bead.dataset.rod);
-        const type = bead.dataset.type;
-        const index = Number(bead.dataset.index);
-        const activeCount = state[rod][type];
-        const active = activeCount > index;
-        const positions = type === "upper"
-            ? (active ? upperActive : upperHome)
-            : (active ? lowerActive : lowerHome);
-
-        bead.classList.toggle("active", active);
-        bead.style.top = `${positions[index]}%`;
+    resetButton.addEventListener("click", function () {
+        state.forEach(function (rodState) {
+            rodState.upper = 0;
+            rodState.lower = 0;
+        });
+        updateView();
     });
 
-    const value = state.reduce((sum, rodState, index) => {
-        const place = 10 ** (rods - index - 1);
-        return sum + ((rodState.upper * 5) + rodState.lower) * place;
-    }, 0);
-
-    valueOutput.value = value;
-    valueOutput.textContent = value.toLocaleString("zh-CN");
-
-    const activePlaces = state
-        .map((rodState, index) => {
-            const digit = (rodState.upper * 5) + rodState.lower;
-            if (!digit) return "";
-            const place = rods - index - 1;
-            return `${digit}在10^${place}位`;
-        })
-        .filter(Boolean);
-
-    placeText.textContent = activePlaces.length
-        ? activePlaces.join("，")
-        : "各档均未拨入。";
-}
-
-resetButton.addEventListener("click", () => {
-    state.forEach((rodState) => {
-        rodState.upper = 0;
-        rodState.lower = 0;
-    });
-    updateView();
-});
-
-createAbacus();
+    createAbacus();
+})();
