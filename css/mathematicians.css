@@ -1,0 +1,7 @@
+
+.hall{padding-top:120px;min-height:100vh;background:#e7d8b5cc}
+.page-title{text-align:center;font-size:60px;color:#7d352b}
+.hall-container{width:88%;margin:auto;display:flex;gap:40px}
+.people-list{width:220px}.person-btn{display:block;width:100%;margin:15px;padding:15px;background:#8b6b45;border-radius:5px}
+.person-detail{flex:1;text-align:center;padding:30px}
+#person-image{width:260px;height:360px;object-fit:cover;border:12px solid #e8d3a0;border-radius:5px;box-shadow:0 5px 20px #0003}

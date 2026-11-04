@@ -1,0 +1,7 @@
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--paper:#e4d2a5;--ink:#33251b;--red:#813b32;--brown:#60412b;--gold:#b18a4a}
+body{font-family:"Microsoft YaHei","STKaiti",serif;color:var(--ink);background:var(--paper);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;background:url("../assets/images/decorate/biankuang.png") center/cover no-repeat;opacity:.08;pointer-events:none}
+a{text-decoration:none;color:inherit}button{font-family:inherit;cursor:pointer}
+.section-title{color:var(--red)}

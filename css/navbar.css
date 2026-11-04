@@ -1,0 +1,7 @@
+
+.navbar{height:76px;position:fixed;top:0;width:100%;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:0 55px;background:#e4d2a5dd;border-bottom:1px solid #9b7540}
+.logo{font-size:30px;color:#813b32;font-weight:bold}
+.navbar nav{position:relative;z-index:1;display:flex;gap:32px}.navbar nav a{font-size:18px}.navbar nav a:hover{color:#813b32}
+.navbar:after{content:"";position:absolute;right:clamp(22px,7vw,130px);bottom:-72px;width:168px;height:72px;background:url("../assets/images/decorate/clouds/cloud-8.png") center/contain no-repeat;pointer-events:none;opacity:.58;animation:navCloudEnter .9s ease-out both,navCloudFloat 5.8s ease-in-out .9s infinite}
+@keyframes navCloudEnter{from{opacity:0;transform:translate(34px,-18px) scale(.92)}to{opacity:.58;transform:translate(0,0) scale(1)}}
+@keyframes navCloudFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(-12px,6px)}}

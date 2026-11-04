@@ -1,0 +1,13 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>中国数学发展史</title>
+<link rel="stylesheet" href="css/global.css"><link rel="stylesheet" href="css/navbar.css"><link rel="stylesheet" href="css/history.css"></head>
+<body><header class="navbar"><div class="logo">算经千年</div><nav><a href="index.html">首页</a><a class="active" href="history.html">发展史</a><a href="mathematicians.html">数学家</a><a href="classics.html">数学经典</a><a href="abacus.html">算盘互动</a><a href="puzzle.html">华容道</a></nav></header>
+<main class="history-page"><section class="history-title"><h1>中国数学发展史</h1><p>穿越千年文明，探索东方数学智慧</p></section>
+<div class="timeline">
+<div class="history-card" data-title="夏商周" data-info="算筹和早期计数体系形成，为中国数学发展奠定基础。">夏商周</div>
+<div class="history-card" data-title="汉代" data-info="《九章算术》形成，中国古代数学体系逐渐完善。">汉代</div>
+<div class="history-card" data-title="魏晋" data-info="刘徽提出割圆术，对数学证明产生重要影响。">魏晋</div>
+<div class="history-card" data-title="南北朝" data-info="祖冲之将圆周率推向世界领先水平。">南北朝</div>
+<div class="history-card" data-title="宋元" data-info="杨辉、秦九韶、朱世杰推动算法发展。">宋元</div>
+</div>
+<div id="historyDetail"><h2>点击时间节点查看介绍</h2><p>未来可放入相关视频、动画和详细资料。</p></div></main>
+<script>document.querySelectorAll('.history-card').forEach(x=>x.onclick=()=>{historyDetail.innerHTML='<h2>'+x.dataset.title+'</h2><p>'+x.dataset.info+'</p>'})</script><script src="js/particle.js"></script></body></html>

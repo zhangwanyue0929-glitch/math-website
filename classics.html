@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数学经典 - 算经千年</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/classics.css">
+</head>
+<body>
+<header class="navbar">
+    <div class="logo">算经千年</div>
+    <nav>
+        <a href="index.html">首页</a>
+        <a href="history.html">发展史</a>
+        <a href="mathematicians.html">数学家</a>
+        <a class="active" href="classics.html">数学经典</a>
+        <a href="abacus.html">算盘互动</a>
+        <a href="puzzle.html">华容道</a>
+    </nav>
+</header>
+
+<main class="classics-page">
+    <section class="classics-hero">
+        <p class="eyebrow">以形释数，以数明理</p>
+        <h1>古代数学经典馆</h1>
+        <p>从直角三角形到组合数列，从割圆逼近到圆周率，中国古代数学把日用测量、算法推演与严密思想连成一条清晰脉络。</p>
+    </section>
+
+    <section class="classic-container">
+        <aside class="classic-menu" aria-label="数学经典选择">
+            <button class="classic-btn active" data-classic="gougu" type="button">
+                <strong>勾股定理</strong>
+                <span>直角三角形的测量法</span>
+            </button>
+            <button class="classic-btn" data-classic="yanghui" type="button">
+                <strong>杨辉三角</strong>
+                <span>组合数与二项展开</span>
+            </button>
+            <button class="classic-btn" data-classic="circle" type="button">
+                <strong>割圆术</strong>
+                <span>以多边形逼近圆</span>
+            </button>
+        </aside>
+
+        <section class="classic-content">
+            <div class="classic-header">
+                <span id="classic-kicker">中国古代数学实验</span>
+                <h2 id="classic-title">勾股定理</h2>
+                <p id="classic-text"></p>
+            </div>
+
+            <div class="classic-grid">
+                <div id="demo-container"></div>
+                <article class="classic-article">
+                    <h3>经典解读</h3>
+                    <p id="classic-detail"></p>
+                    <h3>为什么重要</h3>
+                    <ul id="classic-points"></ul>
+                </article>
+            </div>
+        </section>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>© 2026 算经千年 · 中国古代数学文明互动博物馆</p>
+</footer>
+
+<script src="js/classics.js"></script>
+<script src="js/particle.js"></script>
+</body>
+</html>

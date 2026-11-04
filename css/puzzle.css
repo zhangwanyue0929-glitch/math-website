@@ -1,0 +1,175 @@
+.puzzle {
+    position: relative;
+    min-height: 100vh;
+    padding: 118px 6vw 70px;
+    background:
+        linear-gradient(#ead9b6d9, #ead9b6d9),
+        url("../sucai/xuanzhiwenyang.png") center/520px;
+}
+
+.puzzle::before,
+.puzzle::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: .22;
+}
+
+.puzzle::before {
+    right: 4vw;
+    top: 130px;
+    width: 340px;
+    height: 150px;
+    background-image: url("../assets/images/decorate/clouds/cloud-2.png");
+}
+
+.puzzle::after {
+    left: 4vw;
+    bottom: 28px;
+    width: 420px;
+    height: 230px;
+    background-image: url("../assets/images/decorate/clouds/cloud-7.png");
+}
+
+.puzzle-copy,
+.puzzle-layout {
+    position: relative;
+    z-index: 1;
+}
+
+.puzzle-copy {
+    max-width: 1080px;
+    margin: 0 auto 26px;
+}
+
+.puzzle-copy .eyebrow {
+    color: #8b3a32;
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.puzzle h1 {
+    color: #813b32;
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: 1.05;
+    margin-bottom: 14px;
+}
+
+.puzzle-copy p:last-child {
+    max-width: 760px;
+    font-size: 22px;
+    line-height: 1.7;
+}
+
+.puzzle-layout {
+    max-width: 1040px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(320px, 520px) minmax(220px, 1fr);
+    gap: 28px;
+    align-items: start;
+}
+
+#board {
+    position: relative;
+    width: min(86vw, 520px);
+    aspect-ratio: 4 / 5;
+    padding: 10px;
+    background: #6c4328;
+    border: 6px solid #8b3a32;
+    box-shadow: 0 16px 34px #0003;
+    overflow: hidden;
+}
+
+#board::after {
+    content: "";
+    position: absolute;
+    left: 25%;
+    bottom: 0;
+    width: 50%;
+    height: 12px;
+    background: #d9b56d;
+    box-shadow: 0 -2px 0 #4f2f1d inset;
+}
+
+.piece {
+    position: absolute;
+    padding: 6px;
+    border: 2px solid #813b32;
+    background: #f1dba8;
+    box-shadow: 0 6px 12px #0003;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: none;
+    cursor: grab;
+    transition: left .16s ease, top .16s ease, box-shadow .16s ease;
+}
+
+.piece.dragging {
+    z-index: 5;
+    cursor: grabbing;
+    box-shadow: 0 14px 28px #0005;
+    transition: none;
+}
+
+.piece img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    display: block;
+}
+
+.soldier img {
+    max-width: 92%;
+    max-height: 92%;
+}
+
+.puzzle-panel {
+    padding: 24px;
+    border: 2px solid #b98b3d;
+    background: #f7ecd0dd;
+    color: #30251d;
+    box-shadow: 0 12px 30px #0002;
+}
+
+.counter span {
+    display: block;
+    color: #813b32;
+    font-size: 20px;
+}
+
+.counter strong {
+    display: block;
+    font-size: 60px;
+    line-height: 1.05;
+}
+
+.puzzle-panel p {
+    margin: 20px 0;
+    font-size: 19px;
+    line-height: 1.65;
+}
+
+.puzzle-panel button {
+    width: 100%;
+    border: 0;
+    padding: 13px 18px;
+    background: #8b3a32;
+    color: #fff;
+    font-size: 20px;
+}
+
+@media (max-width: 860px) {
+    .puzzle-layout {
+        grid-template-columns: 1fr;
+    }
+
+    #board {
+        margin: 0 auto;
+    }
+}

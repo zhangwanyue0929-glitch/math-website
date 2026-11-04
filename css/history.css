@@ -1,0 +1,6 @@
+
+.history-page{padding-top:120px;min-height:100vh;text-align:center;background:#e4d2a5}
+.history-title h1{font-size:60px;color:#813b32}.timeline{display:flex;justify-content:center;gap:25px;margin:70px auto}
+.history-card{padding:35px 20px;width:140px;background:#f4e8c8;border:3px solid #9b7540;cursor:pointer;box-shadow:0 5px 15px #0002}
+.history-card:hover{transform:translateY(-10px)}
+#historyDetail{width:70%;margin:auto;background:#f7e8c5;padding:40px;border:8px solid transparent;border-image:url("../assets/images/decorate/biankuang.png") 20}

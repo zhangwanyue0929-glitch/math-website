@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>算盘互动 - 算经千年</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/abacus.css">
+</head>
+<body>
+<header class="navbar">
+    <div class="logo">算经千年</div>
+    <nav>
+        <a href="index.html">首页</a>
+        <a href="history.html">发展史</a>
+        <a href="mathematicians.html">数学家</a>
+        <a href="classics.html">数学经典</a>
+        <a class="active" href="abacus.html">算盘互动</a>
+        <a href="puzzle.html">华容道</a>
+    </nav>
+</header>
+
+<main class="abacus-page">
+    <section class="abacus-intro">
+        <p class="eyebrow">上二下五，靠梁为数</p>
+        <h1>拨一拨传统算盘</h1>
+        <p>点击或拖动珠子，让它们向中梁靠拢。上珠每颗记五，下珠每颗记一；同一档满十后向左一档进位。</p>
+    </section>
+
+    <section class="abacus-workbench">
+        <div class="abacus-hint">
+            <strong>互动提示</strong>
+            <span>点击珠子可直接拨入或拨出；拖动珠子靠近中梁时会自动吸附。先试着拨出 37，再按“清盘”重新开始。</span>
+        </div>
+
+        <div class="abacus-stage" aria-label="传统二五珠算盘互动模型">
+            <img class="abacus-body" src="assets/images/abacus/abacus-body-paper.png" alt="算盘框">
+            <div id="abacusBeads"></div>
+        </div>
+
+        <aside class="abacus-panel">
+            <div>
+                <span>当前读数</span>
+                <output id="abacusValue">0</output>
+            </div>
+            <p id="placeText">各档均未拨入。</p>
+            <button id="resetAbacus" type="button">清盘</button>
+        </aside>
+    </section>
+</main>
+
+<script src="js/abacus.js"></script>
+<script src="js/particle.js"></script>
+</body>
+</html>

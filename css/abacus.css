@@ -1,0 +1,216 @@
+.abacus-page {
+    position: relative;
+    min-height: 100vh;
+    padding: 118px 6vw 70px;
+    background:
+        linear-gradient(#ead9b6d9, #ead9b6d9),
+        url("../sucai/xuanzhiwenyang.png") center/520px;
+}
+
+.abacus-page::before,
+.abacus-page::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: .22;
+}
+
+.abacus-page::before {
+    right: 5vw;
+    top: 122px;
+    width: 290px;
+    height: 145px;
+    background-image: url("../assets/images/decorate/clouds/cloud-3.png");
+}
+
+.abacus-page::after {
+    left: 4vw;
+    bottom: 36px;
+    width: 360px;
+    height: 190px;
+    background-image: url("../assets/images/decorate/clouds/cloud-4.png");
+}
+
+.abacus-intro,
+.abacus-workbench {
+    position: relative;
+    z-index: 1;
+}
+
+.abacus-intro {
+    max-width: 980px;
+    margin: 0 auto 26px;
+    color: #352719;
+}
+
+.abacus-intro .eyebrow {
+    color: #8b3a32;
+    font-size: 20px;
+    letter-spacing: 0;
+    margin-bottom: 8px;
+}
+
+.abacus-intro h1 {
+    color: #813b32;
+    font-size: clamp(42px, 6vw, 72px);
+    line-height: 1.05;
+    margin-bottom: 14px;
+}
+
+.abacus-intro p:last-child {
+    max-width: 760px;
+    font-size: 22px;
+    line-height: 1.7;
+}
+
+.abacus-workbench {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 250px;
+    gap: 22px;
+    align-items: start;
+}
+
+.abacus-hint {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    padding: 16px 22px;
+    border: 1px solid #b98b3d;
+    background: #f7ecd0d9;
+    box-shadow: 0 10px 26px #0001;
+    font-size: 19px;
+    line-height: 1.55;
+}
+
+.abacus-hint strong {
+    flex: 0 0 auto;
+    color: #813b32;
+    font-size: 24px;
+}
+
+.abacus-stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1672 / 941;
+    min-height: 360px;
+    user-select: none;
+    touch-action: none;
+}
+
+.abacus-body {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+#abacusBeads {
+    position: absolute;
+    inset: 0;
+}
+
+.rod {
+    position: absolute;
+    top: 15.2%;
+    bottom: 14.5%;
+    width: 5.3%;
+    transform: translateX(-50%);
+}
+
+.bead {
+    position: absolute;
+    left: 50%;
+    width: clamp(30px, 4.5vw, 58px);
+    height: clamp(30px, 4.5vw, 58px);
+    max-width: 88%;
+    max-height: 13.5%;
+    transform: translate(-50%, -50%);
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    cursor: grab;
+    padding: 0;
+    transition: top .16s ease, filter .16s ease, transform .16s ease;
+}
+
+.bead:active {
+    cursor: grabbing;
+    transform: translate(-50%, -50%) scale(1.04);
+}
+
+.bead img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    display: block;
+}
+
+.bead.active img {
+    filter: drop-shadow(0 5px 8px #0005) saturate(1.08);
+}
+
+.abacus-panel {
+    min-height: 360px;
+    padding: 22px;
+    border: 2px solid #b98b3d;
+    background: #f7ecd0dd;
+    box-shadow: 0 12px 30px #0002;
+    color: #30251d;
+}
+
+.abacus-panel span {
+    display: block;
+    color: #7c3a2f;
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.abacus-panel output {
+    display: block;
+    min-height: 64px;
+    color: #2d2118;
+    font-size: 56px;
+    line-height: 1.1;
+    font-weight: 700;
+    word-break: break-all;
+}
+
+.abacus-panel p {
+    margin: 22px 0;
+    font-size: 18px;
+    line-height: 1.65;
+}
+
+.abacus-panel button {
+    width: 100%;
+    border: 0;
+    padding: 13px 18px;
+    background: #8b3a32;
+    color: #fff;
+    font-size: 20px;
+}
+
+@media (max-width: 900px) {
+    .abacus-workbench {
+        grid-template-columns: 1fr;
+    }
+
+    .abacus-panel {
+        min-height: auto;
+    }
+
+    .abacus-hint {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+    }
+}
