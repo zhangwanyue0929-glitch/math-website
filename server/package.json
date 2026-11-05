@@ -1,0 +1,29 @@
+{
+  "name": "suanjing-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "算经千年数字博物馆的 Node.js 服务：会话、用户、留言、调查、收藏和展项。",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "postinstall": "prisma generate",
+    "migrate": "prisma migrate deploy",
+    "seed": "node prisma/seed.js",
+    "setup": "prisma migrate deploy && node prisma/seed.js",
+    "render-pages": "node scripts/render-pages.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@prisma/client": "5.22.0",
+    "bcryptjs": "2.4.3",
+    "express": "4.21.2",
+    "express-rate-limit": "7.4.1",
+    "express-session": "1.18.1",
+    "helmet": "8.0.0",
+    "multer": "^2.5.0",
+    "prisma": "5.22.0"
+  }
+}

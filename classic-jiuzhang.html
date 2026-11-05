@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <title>九章算术 - 算经千年</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<header class="navbar"><a class="logo" href="index.html">算经千年</a><button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false"><span></span><span></span><span></span></button><nav aria-label="主导航"><a href="index.html">首页</a><a href="history.html">发展史</a><a href="mathematicians.html">数学家</a><a class="active" href="classics.html">数学经典</a><a href="abacus.html">算盘互动</a><a href="puzzle.html">华容道</a><a class="nav-minor" href="board.html">留言</a><a class="nav-minor" href="survey.html">调查</a><a class="nav-minor" href="login.html" data-nav-account>登录</a></nav></header>
+<main class="article-page page-pattern">
+    <p class="crumb"><a href="index.html">首页</a> / <a href="classics.html">数学经典</a> / <span>九章算术</span></p>
+    <p id="entryStatus" class="entry-status" role="status"></p>
+    <article class="sheet" data-entry data-kind="classic" data-slug="jiuzhang">
+        <header class="sheet-head">
+            <p class="eyebrow" data-field="subtitle">汉代算法的总集，约于东汉定型</p>
+            <h1 data-field="title">九章算术</h1>
+            <p class="summary" data-field="summary">用九类实际问题组织算法，是中国古代数学最重要的典籍之一。魏刘徽注、唐李淳风注都附在后来的传本里。</p>
+            <div class="sheet-actions"><button class="btn" id="favBtn" type="button">收藏此页</button><a class="btn btn-ghost" data-field-href="demoHref" href="classics.html#gougu">打开相关页面</a></div>
+        </header>
+        <div class="sheet-grid">
+            <div class="sheet-side"><div class="diagram-wrap"><p>辅助演示图</p><svg class="math-svg" viewBox="0 0 320 220" role="img" aria-label="勾三股四弦五示意"><polyline points="40,180 40,60 200,180 40,180" fill="rgba(139,58,50,0.08)" stroke="#8b3a32" stroke-width="3"/><text x="18" y="126" fill="#8b3a32" font-size="16">勾</text><text x="108" y="204" fill="#8b3a32" font-size="16">股</text><text x="124" y="112" fill="#8b3a32" font-size="16">弦</text></svg></div></div>
+            <div class="sheet-body">
+                <section class="block block-source"><h2>史料原文</h2><p class="source-note" data-field="sourceNote">《九章算术》勾股术。九章的名称是：方田、粟米、衰分、少广、商功、均输、盈不足、方程、勾股。</p><blockquote data-field="sourceText">勾股术曰：勾股各自乘，并而开方除之，即弦。</blockquote></section>
+                <section class="block block-modern"><h2>现代释义</h2><div data-field="modernText" data-multiline="1"><p>《九章算术》先给题目，再给术文。术文是计算步骤。面积、比例、衰分、开方、体积、均输、盈不足、线性方程组和勾股，都收在这一套体例里。</p><p>传世文本里常常同时有汉代正文、魏晋刘徽注和唐代李淳风注。引用时要说清楚是哪一层。本馆的人物页把刘徽的割圆注单独标出，不把它提前写成《九章》正文。</p></div></section>
+                <section class="block block-demo"><h2>辅助演示</h2><p data-field="demoNote">勾股页演示的是九章勾股术的一个关系。方程、盈不足等其他章没有全部做成互动，避免用一个滑块代表整部书。</p></section>
+                <ul class="point-list" data-field-list="points"><li>九类问题，一类一套算法</li><li>正文、刘徽注、李淳风注不是同一层文字</li><li>勾股术对应 a² + b² = c²</li></ul>
+            </div>
+        </div>
+    </article>
+    <footer class="site-foot"><a href="catalog.html">馆藏目录</a><a href="board.html">留言板</a><a href="survey.html">参观调查</a></footer>
+</main>
+<script src="js/api.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/entry.js"></script>
+<script src="js/particle.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <title>参观调查 - 算经千年</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<header class="navbar">
+    <a class="logo" href="index.html">算经千年</a>
+    <button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+    <nav aria-label="主导航">
+        <a href="index.html">首页</a>
+        <a href="history.html">发展史</a>
+        <a href="mathematicians.html">数学家</a>
+        <a href="classics.html">数学经典</a>
+        <a href="abacus.html">算盘互动</a>
+        <a href="puzzle.html">华容道</a>
+        <a class="nav-minor" href="board.html">留言</a>
+        <a class="nav-minor active" href="survey.html">调查</a>
+        <a class="nav-minor" href="login.html" data-nav-account>登录</a>
+    </nav>
+</header>
+<main class="plain-page page-plain">
+    <h1 class="page-title">参观调查</h1>
+    <p class="lead">五个问题，用来看史料、释义和演示哪一种更清楚。每位登录用户提交一次。</p>
+    <p id="surveyNotice" class="notice" hidden></p>
+    <form id="surveyForm">
+        <div id="surveyBox" class="survey-list"></div>
+        <p id="formError" class="form-error" role="alert"></p>
+        <button id="surveySubmit" class="btn gap-top" type="submit">提交调查</button>
+    </form>
+</main>
+<script src="js/api.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/survey.js"></script>
+</body>
+</html>

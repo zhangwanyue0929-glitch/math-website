@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <title>留言审核 - 算经千年</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body data-admin="messages">
+<header class="navbar">
+    <a class="logo" href="index.html">算经千年</a>
+    <button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav aria-label="主导航">
+        <a href="index.html">首页</a>
+        <a href="history.html">发展史</a>
+        <a href="mathematicians.html">数学家</a>
+        <a href="classics.html">数学经典</a>
+        <a href="abacus.html">算盘互动</a>
+        <a href="puzzle.html">华容道</a>
+        <a class="nav-minor" href="board.html">留言</a>
+        <a class="nav-minor" href="survey.html">调查</a>
+        <a class="nav-minor" href="login.html" data-nav-account>登录</a>
+    </nav>
+</header>
+<main class="plain-page page-plain">
+    <h1 class="page-title">留言审核</h1>
+    <p id="adminNotice" class="notice" hidden></p>
+    <div class="admin-shell">
+        <aside class="admin-nav">
+            <a href="admin.html">展项</a>
+            <a class="active" href="admin-messages.html">留言审核</a>
+            <a href="admin-users.html">用户</a>
+            <a href="admin-survey.html">调查</a>
+            <a href="board.html">查看留言板</a>
+        </aside>
+        <section class="panel">
+            <label class="field">状态
+                <select id="messageStatus">
+                    <option value="PENDING">待审核</option>
+                    <option value="">全部</option>
+                    <option value="APPROVED">已公开</option>
+                    <option value="REJECTED">未通过</option>
+                </select>
+            </label>
+            <div id="moderationList" class="card-list gap-top"></div>
+            <div id="messagePager" class="pager"></div>
+        </section>
+    </div>
+</main>
+<script src="js/api.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

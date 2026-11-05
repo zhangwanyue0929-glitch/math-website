@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <title>海岛算经 - 算经千年</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<header class="navbar"><a class="logo" href="index.html">算经千年</a><button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false"><span></span><span></span><span></span></button><nav aria-label="主导航"><a href="index.html">首页</a><a href="history.html">发展史</a><a href="mathematicians.html">数学家</a><a class="active" href="classics.html">数学经典</a><a href="abacus.html">算盘互动</a><a href="puzzle.html">华容道</a><a class="nav-minor" href="board.html">留言</a><a class="nav-minor" href="survey.html">调查</a><a class="nav-minor" href="login.html" data-nav-account>登录</a></nav></header>
+<main class="article-page page-pattern">
+    <p class="crumb"><a href="index.html">首页</a> / <a href="classics.html">数学经典</a> / <span>海岛算经</span></p>
+    <p id="entryStatus" class="entry-status" role="status"></p>
+    <article class="sheet" data-entry data-kind="classic" data-slug="haidao">
+        <header class="sheet-head">
+            <p class="eyebrow" data-field="subtitle">刘徽的重差术</p>
+            <h1 data-field="title">海岛算经</h1>
+            <p class="summary" data-field="summary">原是刘徽《九章算术注》的第十卷，后来单行。用两根表杆测量不能到达的海岛高度和距离。</p>
+            <div class="sheet-actions"><button class="btn" id="favBtn" type="button">收藏此页</button><a class="btn btn-ghost" data-field-href="demoHref" href="person-liuhui.html">打开相关页面</a></div>
+        </header>
+        <div class="sheet-grid">
+            <div class="sheet-side"><div class="diagram-wrap"><p>辅助演示图</p><svg class="math-svg" viewBox="0 0 320 180" role="img" aria-label="两表测岛示意"><polygon points="250,28 286,78 214,78" fill="rgba(139,58,50,0.15)" stroke="#8b3a32"/><line x1="70" y1="150" x2="300" y2="150" stroke="#c6a15b"/><line x1="90" y1="150" x2="90" y2="78" stroke="#8b3a32" stroke-width="3"/><line x1="170" y1="150" x2="170" y2="78" stroke="#8b3a32" stroke-width="3"/><text x="90" y="170" text-anchor="middle" fill="#5c4636" font-size="14">前表</text><text x="170" y="170" text-anchor="middle" fill="#5c4636" font-size="14">后表</text><text x="250" y="98" text-anchor="middle" fill="#8b3a32" font-size="14">岛</text></svg></div></div>
+            <div class="sheet-body">
+                <section class="block block-source"><h2>史料原文</h2><p class="source-note" data-field="sourceNote">《海岛算经》第一问。单位是汉魏的步、里：1 步为 6 尺，1 里为 300 步。</p><blockquote data-field="sourceText">今有望海岛，立两表齐高三丈，前后相去千步，令后表与前表参相直。从前表却行一百二十三步，人目着地取望岛峰，与表末参合。从后表却行一百二十七步，人目着地取望岛峰，亦与表末参合。问岛高及去表各几何？答曰：岛高四里五十五步，去表一百二步。</blockquote></section>
+                <section class="block block-modern"><h2>现代释义</h2><div data-field="modernText" data-multiline="1"><p>重差的意思是：用两次测量的差，求出不可到达的高度和距离。表高、两表间距、两次退行步数都是可以在地面上量到的，岛高却不必渡海。</p><p>用今天的话说，它依赖相似三角形。刘徽没有用这个现代名词。本馆在释义里写明对应关系，原文栏仍保留题目的原有问法。</p></div></section>
+                <section class="block block-demo"><h2>辅助演示</h2><p data-field="demoNote">页内示意图画出两根表和海岛，只帮助看“前表、后表、退行”。图上的比例是为了放进屏幕，不是按 123 步对 1000 步的真实比例绘制。</p></section>
+                <ul class="point-list" data-field-list="points"><li>重差术：用两次测量的差</li><li>第一问给出岛高四里五十五步</li><li>后来从《九章》注中分出单行</li></ul>
+            </div>
+        </div>
+    </article>
+    <footer class="site-foot"><a href="catalog.html">馆藏目录</a><a href="board.html">留言板</a><a href="survey.html">参观调查</a></footer>
+</main>
+<script src="js/api.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/entry.js"></script>
+<script src="js/particle.js"></script>
+</body>
+</html>

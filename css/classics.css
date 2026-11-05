@@ -155,13 +155,23 @@
 }
 
 .classic-article p,
-.classic-article li {
+.classic-article li,
+#classic-detail {
     font-size: 16px;
     line-height: 1.75;
 }
 
+#classic-detail {
+    white-space: pre-wrap;
+}
+
 .classic-article ul {
     padding-left: 1.2em;
+}
+
+.classic-article blockquote {
+    white-space: pre-wrap;
+    margin: 6px 0 0;
 }
 
 .math-svg {

@@ -1,0 +1,430 @@
+/**
+ * 全馆展项的静态底稿。
+ * 浏览器直接打开时，二级页面和目录用这份数据保底；
+ * Node 种子脚本也会 require 同一份文件，写进 MySQL。
+ * 后台改过的文字只存在数据库里，不会回写这个文件。
+ * GitHub Pages 上没有数据库，访客看到的就是这里的文字。
+ *
+ * 三段文字的分工（开题报告要求区分清楚）：
+ *   sourceText 史料原文，只放传世文献里的句子，并在 sourceNote 写出处。
+ *   modernText 现代释义，用今天的话说明意思，不冒充古人的话。
+ *   demoNote   辅助演示，说明页面上的图、算盘、滑块是本馆做的，不是古籍插图。
+ */
+(function (root, factory) {
+    var data = factory();
+    if (typeof module === "object" && module.exports) {
+        module.exports = data;
+    }
+    if (typeof window !== "undefined") {
+        window.SUANJING_CONTENT = data;
+    }
+})(typeof globalThis !== "undefined" ? globalThis : this, function () {
+    var items = [
+        {
+            kind: "MATHEMATICIAN",
+            slug: "zuchongzhi",
+            title: "祖冲之",
+            subtitle: "南北朝 · 429—500",
+            summary: "南北朝数学家、天文学家。史书记载他把圆周率夹在 3.1415926 与 3.1415927 之间，并给出密率 355/113、约率 22/7。",
+            sourceNote: "《隋书·律历志》备数。下面是节引，不是《缀术》原文。《缀术》已经失传。",
+            sourceText: "宋末，南徐州从事史祖冲之更开密法，以圆径一亿为一丈，圆周盈数三丈一尺四寸一分五厘九毫二秒七忽，朒数三丈一尺四寸一分五厘九毫二秒六忽，正数在盈朒二限之间。密率，圆径一百一十三，圆周三百五十五。约率，圆径七，周二十二。",
+            modernText: "这段话的意思是：把直径定为一丈，再分成一亿份去量圆周。盈数是偏大的一界，朒数是偏小的一界，真值夹在中间，所以今天写成 3.1415926 < π < 3.1415927。密率 355/113 和约率 22/7 是两个分数形式的近似。\n\n生年有 429 与 427 两种通行说法，本馆年份取 429—500。具体是把割圆算到多少边，原文没有留下来，不能把后人的推算说成祖冲之的原话。他又编订《大明历》。儿子祖暅的“幂势既同，则积不容异”见于唐代李淳风的《九章算术》注，说的是祖暅，不要写进祖冲之名下。",
+            demoNote: "割圆术页面用内接正多边形逼近圆周，是本馆做的辅助演示，用来看“边数变多，误差变小”。它不是《缀术》里的算图。",
+            imageUrl: "assets/images/mathematicians/zuchongzhi.jpg",
+            imageCaption: "后世绘制的人物画像，只帮助辨认专题，不是当时留下的写真。",
+            demoHref: "classics.html#circle",
+            pageUrl: "person-zuchongzhi.html",
+            points: "盈朒二限：3.1415926 < π < 3.1415927\n密率 355/113，约率 22/7\n《缀术》已佚，演算步骤没有留下来",
+            diagram: "circle",
+            sortOrder: 1
+        },
+        {
+            kind: "MATHEMATICIAN",
+            slug: "liuhui",
+            title: "刘徽",
+            subtitle: "魏晋 · 263 年注《九章算术》",
+            summary: "魏晋数学家。为《九章算术》作注，用出入相补说明面积和体积，并提出割圆术。",
+            sourceNote: "刘徽《九章算术注》圆田术注。这是他解释割圆术的原话。",
+            sourceText: "割之弥细，所失弥少。割之又割，以至于不可割，则与圆合体而无所失矣。",
+            modernText: "刘徽从圆内接正六边形开始，不断把边数加倍。边分得越细，多边形和圆之间空出的部分越少。他在注里给出圆周率 157/50，也就是 3.14，并说明还可以继续往下算。\n\n他活动于魏晋，籍贯有不同说法，本馆不写没有把握的出生年，只采用可以核对的年代：魏景元四年（263 年）为《九章算术》作注。他还著《海岛算经》，用重差术测量不能到达的高度和距离。",
+            demoNote: "经典馆的割圆滑块可以把边数从 6 加到 96，旁边的圆周率是现代公式算给观众看的，不是刘徽算筹上的原式。",
+            imageUrl: "assets/images/mathematicians/liuhui.jpg",
+            imageCaption: "后世绘制的人物画像，只帮助辨认专题，不是当时留下的写真。",
+            demoHref: "classics.html#circle",
+            pageUrl: "person-liuhui.html",
+            points: "割圆术与出入相补\n注《九章算术》（263 年）\n《海岛算经》重差术",
+            diagram: "circle",
+            sortOrder: 2
+        },
+        {
+            kind: "MATHEMATICIAN",
+            slug: "yanghui",
+            title: "杨辉",
+            subtitle: "南宋 · 钱塘人，约十三世纪后半叶",
+            summary: "南宋数学家。在《详解九章算法》里记下三角数表，并说明这张表贾宪已经在用。",
+            sourceNote: "杨辉所录“开方作法本源”图注。杨辉把出处写在图上，没有把这张表说成自己的发明。",
+            sourceText: "出释锁算书，贾宪用此术。",
+            modernText: "今天常说的杨辉三角，每一数等于肩上左右两数之和，也是二项式系数。在中国数学里，它更早用于开方。杨辉在 1261 年的《详解九章算法》中记录了这张图，并注明贾宪已经使用。\n\n所以本馆不写“杨辉发明了杨辉三角”。杨辉自己的工作，还包括乘除捷法和《日用算法》一类实用算法书。他的生卒年没有可靠记载。",
+            demoNote: "经典馆可以增减行数，看每一行如何由上一行加出来。那是本馆排的数表，不是宋版书的书影。",
+            imageUrl: "assets/images/mathematicians/yanghui.jpg",
+            imageCaption: "后世绘制的人物画像，只帮助辨认专题，不是当时留下的写真。",
+            demoHref: "classics.html#yanghui",
+            pageUrl: "person-yanghui.html",
+            points: "记录贾宪的开方作法本源\n《详解九章算法》（1261）\n整理乘除捷法",
+            diagram: "pascal",
+            sortOrder: 3
+        },
+        {
+            kind: "MATHEMATICIAN",
+            slug: "qinjiushao",
+            title: "秦九韶",
+            subtitle: "南宋 · 《数书九章》成书于 1247 年",
+            summary: "南宋数学家。著《数书九章》，系统写出一次同余式组的大衍求一术，以及高次方程的数值解法。",
+            sourceNote: "《数书九章》大衍类“大衍求一术”术文节引。",
+            sourceText: "置奇右上，定居右下，天元一于左上。先以右上除右下，所得商数与左上一相生，入左下。然后乃以右行上下，以少除多，递互除之。须使右上末后奇一而止。乃验左上所得，以为乘率。",
+            modernText: "大衍求一术解决的是一类“几个除数分别去除，余数已知，求原来的数”的问题，和今天的一次同余式组是同一类数学对象。秦九韶给出的是一套用算筹可以执行的算法，不是后来用现代符号写成的中国剩余定理。\n\n正负开方术则是求高次方程数值根的方法，和后来的霍纳法思路相近。本馆只说明这个对应，不把十九世纪的写法回写成南宋原文。他的生卒年各书略有出入，本馆只强调可核对的成书年：1247 年。",
+            demoNote: "本页下方的方格是本馆画的示意，帮助看“右上、右下、左上”这几个位置，不能代替术文本身的演算。",
+            imageUrl: "assets/images/mathematicians/qinjiushao.jpg",
+            imageCaption: "后世绘制的人物画像，只帮助辨认专题，不是当时留下的写真。",
+            demoHref: "classic-shushu.html",
+            pageUrl: "person-qinjiushao.html",
+            points: "大衍求一术\n正负开方术\n《数书九章》（1247）",
+            diagram: "grid",
+            sortOrder: 4
+        },
+        {
+            kind: "MATHEMATICIAN",
+            slug: "zhushijie",
+            title: "朱世杰",
+            subtitle: "元初 · 字汉卿，号松庭，燕山人",
+            summary: "元代数学家。著《算学启蒙》和《四元玉鉴》，把天元术推广为可以同时设立多个未知数的四元术。",
+            sourceNote: "莫若《四元玉鉴》前序节引。这是同时人的序，不是朱世杰的算题原文。",
+            sourceText: "吾友燕山朱汉卿先生演数有年，探三才之赜，索《九章》之隐，按天地人物立成四元。",
+            modernText: "天元术用“天元”表示一个未知数，有点像今天设 x。四元术按天、地、人、物设立四个未知数，用来布列和消元。四元术写在筹算的位置关系里，不是现代的方程组符号。\n\n《算学启蒙》（1299）由浅入深，适合作为入门；《四元玉鉴》（1303）是四元术的代表著作。朱世杰的生卒年没有可靠记载，本馆不补一个看起来精确的年份。",
+            demoNote: "本页示意图只用四个方位标出天、地、人、物，帮助记忆名称。它不是《四元玉鉴》的原图。",
+            imageUrl: "assets/images/mathematicians/zhushijie.jpg",
+            imageCaption: "后世绘制的人物画像，只帮助辨认专题，不是当时留下的写真。",
+            demoHref: "classic-siyuan.html",
+            pageUrl: "person-zhushijie.html",
+            points: "四元术\n《四元玉鉴》（1303）\n《算学启蒙》（1299）",
+            diagram: "four",
+            sortOrder: 5
+        },
+        {
+            kind: "MATHEMATICIAN",
+            slug: "liye",
+            title: "李冶",
+            subtitle: "金元 · 1192—1279",
+            summary: "金元数学家，字仁卿，号敬斋。著《测圆海镜》和《益古演段》，是天元术流传至今的主要文献。",
+            sourceNote: "李冶《测圆海镜》序里的一段话，说的是他对“数能不能穷尽”的看法。",
+            sourceText: "故谓数为难穷，斯可；谓数为不可穷，斯不可。何则？彼其冥冥之中，固有昭昭者存。",
+            modernText: "《测圆海镜》（1248）围绕圆城图式，用天元术列方程。天元一就是未知数。《益古演段》（1259）把题目写得更便于学习。李冶与秦九韶大约同时，一个在北方讲天元术，一个在南方讲大衍术和正负开方，本馆分在两个专题里，不混成一个人的成果。\n\n画像栏只放了有后世画像可用的五位。李冶没有可靠的写真，所以这里用一枚题名印章，避免拿一张想象图冒充史料。",
+            demoNote: "印章和圆城示意图都是本馆绘制的辅助图形，不是金元刻本上的插图。",
+            imageUrl: "assets/images/mathematicians/liye.svg",
+            imageCaption: "馆内题名印章，不用想象画像冒充史料。",
+            demoHref: "era-songyuan.html",
+            pageUrl: "person-liye.html",
+            points: "天元术\n《测圆海镜》（1248）\n《益古演段》（1259）",
+            diagram: "circle",
+            sortOrder: 6
+        },
+        {
+            kind: "ERA",
+            slug: "xia",
+            title: "夏商周",
+            subtitle: "记数与算筹的早期线索",
+            summary: "商周时期的甲骨文和金文里已经有十进制的数字写法。算筹记数至迟在战国秦汉形成明确的十进位值制。",
+            sourceNote: "本段不引一条单独的算经句子。早期材料主要是甲骨、金文和后来对算筹的记载，不宜编成一句“原文”。",
+            sourceText: "商代甲骨文中的数字，已经按十、百、千分层书写。算筹本身是竹木制成的算具，容易腐朽，很少直接留到今天。十进位值制的完整用法，要到战国秦汉的文献和算筹记数习惯里才说得清楚。",
+            modernText: "十进位值制的意思是：同一个数字放在不同的位置，表示的值不同，满十进一。这是后来《九章算术》能够用算筹做分数、比例和方程的前提。\n\n夏代的数学几乎没有直接文献。本馆把“夏商周”当作早期记数阶段，不把传说里的发明者写成已证实的历史。",
+            demoNote: "下面的算筹示意图是本馆按纵式、横式的记数原则画的，帮助看“个位、十位交叉摆放”。它不是出土实物的照片。",
+            imageUrl: "",
+            imageCaption: "",
+            demoHref: "abacus.html",
+            pageUrl: "era-xia.html",
+            points: "甲骨文中的十进制数字\n算筹记数与十进位值制\n不把传说当成已证实的史事",
+            diagram: "rods",
+            sortOrder: 1
+        },
+        {
+            kind: "ERA",
+            slug: "han",
+            title: "汉代",
+            subtitle: "《周髀算经》与《九章算术》",
+            summary: "汉代形成了两部后来影响很大的数学书：《周髀算经》讲天文测量里的勾股，《九章算术》用九类问题组织算法。",
+            sourceNote: "《九章算术》勾股术。原书给出算法，一般不先写证明。",
+            sourceText: "勾股术曰：勾股各自乘，并而开方除之，即弦。",
+            modernText: "这句话就是今天的 a² + b² = c²，只是它被写成可以一步步执行的术文：勾、股分别自乘，相加，再开平方。《九章算术》大约在东汉定型，分成方田、粟米、衰分、少广、商功、均输、盈不足、方程、勾股九章。\n\n《周髀算经》的成书跨战国到汉代，里面有“勾三股四弦五”。它同时是一部天文书，里面的日高数字依赖当时的宇宙模型，不能当成现代天文测量。",
+            demoNote: "勾股页面可以拖动勾和股，看弦长如何变化。滑块和公式是本馆加的，不是汉简上的原件。",
+            imageUrl: "",
+            imageCaption: "",
+            demoHref: "classics.html#gougu",
+            pageUrl: "era-han.html",
+            points: "《九章算术》九类算法\n《周髀算经》中的勾三股四弦五\n算法先写成术文，证明多在后来的注里",
+            diagram: "gougu",
+            sortOrder: 2
+        },
+        {
+            kind: "ERA",
+            slug: "wei",
+            title: "魏晋",
+            subtitle: "刘徽注经",
+            summary: "刘徽为《九章算术》作注，既解释算法为什么成立，也提出割圆术。数学开始从“按术去算”走向可以复核的论证。",
+            sourceNote: "刘徽《九章算术注》圆田术注。",
+            sourceText: "割之弥细，所失弥少。割之又割，以至于不可割，则与圆合体而无所失矣。",
+            modernText: "注和原文要分开读。正文多是汉代已经流传的题目和术文，注文才是刘徽的解释。他用出入相补说明面积可以拼合，用割圆说明曲线可以用直线段逼近。\n\n这一阶段的关键不是多了一位名人，而是算法开始附带理由。读者可以回头检查每一步，而不必只记住口诀。",
+            demoNote: "割圆演示里的正多边形可以逐次加倍。图是本馆用 SVG 画的，方便放大，不是魏晋抄本。",
+            imageUrl: "",
+            imageCaption: "",
+            demoHref: "person-liuhui.html",
+            pageUrl: "era-wei.html",
+            points: "刘徽注与正文不是同一时代的文字\n出入相补\n割圆术",
+            diagram: "circle",
+            sortOrder: 3
+        },
+        {
+            kind: "ERA",
+            slug: "nanbei",
+            title: "南北朝",
+            subtitle: "祖冲之与祖暅",
+            summary: "祖冲之把圆周率的上下界推进到小数第七位，并编订《大明历》。祖暅提出后来所称的祖暅原理。",
+            sourceNote: "祖冲之的圆周率见《隋书·律历志》。祖暅的原则见李淳风《九章算术》注所引，不是《缀术》原文。",
+            sourceText: "正数在盈朒二限之间。密率，圆径一百一十三，圆周三百五十五。约率，圆径七，周二十二。\n幂势既同，则积不容异。",
+            modernText: "前三句讲祖冲之的圆周率：真值在一盈一朒之间，另外给了两个分数。后一句讲祖暅：如果两个立体在每一高度的截面面积都相同，它们的体积就相等。这句话和后来欧洲的卡瓦列里原理说的是同一类事实，但祖暅的文本是中国注疏传统里的话，本馆不当成同一篇文章。\n\n《缀术》在唐代被列为算学教材，后来失传。失传就要直说，不用现代推导填成“原书如此”。",
+            demoNote: "圆周率演示只帮助观察逼近过程。祖暅原理本页没有做成体积动画，避免用一个粗糙动画冒充证明。",
+            imageUrl: "",
+            imageCaption: "",
+            demoHref: "person-zuchongzhi.html",
+            pageUrl: "era-nanbei.html",
+            points: "祖冲之的盈朒二限与密率、约率\n祖暅原理见李淳风注\n《缀术》已佚",
+            diagram: "circle",
+            sortOrder: 4
+        },
+        {
+            kind: "ERA",
+            slug: "songyuan",
+            title: "宋元",
+            subtitle: "天元、四元与实用算法",
+            summary: "宋元是算法传统的高峰。秦九韶、李冶、杨辉、朱世杰分别留下同余式、天元术、实用捷法和四元术的著作。算盘也在日用计算里逐渐普及。",
+            sourceNote: "这里并列两位作者的原话，中间用空行分开，避免看成同一本书。",
+            sourceText: "秦九韶《数书九章》术文节引：置奇右上，定居右下，天元一于左上。\n\n李冶《测圆海镜》序：故谓数为难穷，斯可；谓数为不可穷，斯不可。",
+            modernText: "北方的李冶用天元术列方程，南方的秦九韶整理大衍求一术和正负开方，杨辉重视可以教、可以用的算法，朱世杰把未知数扩到四个。四个人的书不要合成“宋元数学”一句话。\n\n算盘的普及比算筹晚。算筹是这几部书的主要计算工具，上二下五的算盘是日用场景里后起的工具。馆里的算盘页单独标明了这一点。",
+            demoNote: "本时期没有一个演示能同时代表四部书。请从人物专题或典籍分册进入，各自的图只解释那一部书。",
+            imageUrl: "",
+            imageCaption: "",
+            demoHref: "classics.html",
+            pageUrl: "era-songyuan.html",
+            points: "秦九韶《数书九章》\n李冶《测圆海镜》\n杨辉的实用算法与朱世杰四元术",
+            diagram: "four",
+            sortOrder: 5
+        },
+        {
+            kind: "CLASSIC",
+            slug: "zhoubi",
+            title: "周髀算经",
+            subtitle: "战国至汉代成书的天文数学书",
+            summary: "现存最早系统使用勾股测量的著作之一。商高对周公问，留下了“勾三股四弦五”。",
+            sourceNote: "《周髀算经》卷上，商高答周公。",
+            sourceText: "数之法出于圆方。圆出于方，方出于矩，矩出于九九八十一。故折矩以为勾广三，股修四，径隅五。",
+            modernText: "“勾广三，股修四，径隅五”是 3² + 4² = 5² 的特例。书里用勾股讨论表杆测日影、日高这一类问题。那些天文数字建立在盖天说的模型上，模型变了，数字就不能直接当成今天测到的日地距离。\n\n读这本书时要分开两层：勾股关系本身可以在图形里验证；书里的宇宙尺寸是历史模型，不是本馆要证明的物理结论。",
+            demoNote: "勾股演示可以把勾、股拖成 3 和 4，看到弦长为 5。这是用现代页面重做的特例，不是《周髀》的书影。",
+            imageUrl: "",
+            imageCaption: "",
+            demoHref: "classics.html#gougu",
+            pageUrl: "classic-zhoubi.html",
+            points: "勾三、股四、径隅五\n测量传统与天文模型要分开看\n成书约在战国至汉代",
+            diagram: "gougu",
+            sortOrder: 1
+        },
+        {
+            kind: "CLASSIC",
+            slug: "jiuzhang",
+            title: "九章算术",
+            subtitle: "汉代算法的总集，约于东汉定型",
+            summary: "用九类实际问题组织算法，是中国古代数学最重要的典籍之一。魏刘徽注、唐李淳风注都附在后来的传本里。",
+            sourceNote: "《九章算术》勾股术。九章的名称是：方田、粟米、衰分、少广、商功、均输、盈不足、方程、勾股。",
+            sourceText: "勾股术曰：勾股各自乘，并而开方除之，即弦。",
+            modernText: "《九章算术》先给题目，再给术文。术文是计算步骤。面积、比例、衰分、开方、体积、均输、盈不足、线性方程组和勾股，都收在这一套体例里。\n\n传世文本里常常同时有汉代正文、魏晋刘徽注和唐代李淳风注。引用时要说清楚是哪一层。本馆的人物页把刘徽的割圆注单独标出，不把它提前写成《九章》正文。",
+            demoNote: "勾股页演示的是九章勾股术的一个关系。方程、盈不足等其他章没有全部做成互动，避免用一个滑块代表整部书。",
+            imageUrl: "",
+            imageCaption: "",
+            demoHref: "classics.html#gougu",
+            pageUrl: "classic-jiuzhang.html",
+            points: "九类问题，一类一套算法\n正文、刘徽注、李淳风注不是同一层文字\n勾股术对应 a² + b² = c²",
+            diagram: "gougu",
+            sortOrder: 2
+        },
+        {
+            kind: "CLASSIC",
+            slug: "haidao",
+            title: "海岛算经",
+            subtitle: "刘徽的重差术",
+            summary: "原是刘徽《九章算术注》的第十卷，后来单行。用两根表杆测量不能到达的海岛高度和距离。",
+            sourceNote: "《海岛算经》第一问。单位是汉魏的步、里：1 步为 6 尺，1 里为 300 步。",
+            sourceText: "今有望海岛，立两表齐高三丈，前后相去千步，令后表与前表参相直。从前表却行一百二十三步，人目着地取望岛峰，与表末参合。从后表却行一百二十七步，人目着地取望岛峰，亦与表末参合。问岛高及去表各几何？答曰：岛高四里五十五步，去表一百二步。",
+            modernText: "重差的意思是：用两次测量的差，求出不可到达的高度和距离。表高、两表间距、两次退行步数都是可以在地面上量到的，岛高却不必渡海。\n\n用今天的话说，它依赖相似三角形。刘徽没有用这个现代名词。本馆在释义里写明对应关系，原文栏仍保留题目的原有问法。",
+            demoNote: "页内示意图画出两根表和海岛，只帮助看“前表、后表、退行”。图上的比例是为了放进屏幕，不是按 123 步对 1000 步的真实比例绘制。",
+            imageUrl: "",
+            imageCaption: "",
+            demoHref: "person-liuhui.html",
+            pageUrl: "classic-haidao.html",
+            points: "重差术：用两次测量的差\n第一问给出岛高四里五十五步\n后来从《九章》注中分出单行",
+            diagram: "island",
+            sortOrder: 3
+        },
+        {
+            kind: "CLASSIC",
+            slug: "shushu",
+            title: "数书九章",
+            subtitle: "秦九韶，1247 年",
+            summary: "又名《数学九章》。九类为大衍、天时、田域、测望、赋役、钱谷、营建、军旅、市易。大衍求一术和正负开方术是书中最受重视的算法。",
+            sourceNote: "《数书九章》大衍求一术术文节引。",
+            sourceText: "置奇右上，定居右下，天元一于左上。先以右上除右下，所得商数与左上一相生，入左下。须使右上末后奇一而止。乃验左上所得，以为乘率。",
+            modernText: "大衍求一术求的是乘率，用来解一次同余式组。术文按算筹的上下左右位置来写，所以原文里的“右上”“左下”是操作位置，不是修辞。\n\n正负开方术处理含有负系数的高次方程，一步步试商、减根。它和后来的数值解法可以对照着讲，但对照是现代释义，不是宋人的表述。",
+            demoNote: "人物页上的四格图只标出术文开头的几个位置，不能用来完成一道大衍题。完整演算需要按术文逐步做，本馆没有把它简化成一次点击。",
+            imageUrl: "",
+            imageCaption: "",
+            demoHref: "person-qinjiushao.html",
+            pageUrl: "classic-shushu.html",
+            points: "大衍求一术\n正负开方术\n九类问题覆盖历法、田亩、赋役和工程",
+            diagram: "grid",
+            sortOrder: 4
+        },
+        {
+            kind: "CLASSIC",
+            slug: "siyuan",
+            title: "四元玉鉴",
+            subtitle: "朱世杰，1303 年",
+            summary: "在天元术之后，用天、地、人、物四个未知数布列方程，是四元术的代表著作。",
+            sourceNote: "莫若前序节引，用来说明“四元”指什么。算题本身比这句序更长，这里不截一条半题冒充全题。",
+            sourceText: "按天地人物立成四元。",
+            modernText: "一个未知数称天元，这是李冶、朱世杰之前已经发展的天元术。朱世杰把可以同时出现的未知数增加到四个，并讨论如何消元、如何处理高次项。\n\n《算学启蒙》可以当作它的前行读本。序言是莫若写的，引用时要说“序”，不要说成朱世杰的术文。",
+            demoNote: "页内四方位图只标注四个元的名称。筹算的真实布式比这张图密得多，本馆不把示意画说成原书版式。",
+            imageUrl: "",
+            imageCaption: "",
+            demoHref: "person-zhushijie.html",
+            pageUrl: "classic-siyuan.html",
+            points: "四元：天、地、人、物\n《四元玉鉴》（1303）\n《算学启蒙》（1299）是较浅的入门书",
+            diagram: "four",
+            sortOrder: 5
+        },
+        {
+            kind: "EXHIBIT",
+            slug: "gougu",
+            title: "勾股定理",
+            subtitle: "中国古代数学实验",
+            summary: "中国古代把直角三角形较短的直角边称为勾，较长的直角边称为股，斜边称为弦。勾的平方与股的平方相加，等于弦的平方。",
+            sourceNote: "《九章算术》勾股术。特例“勾三股四弦五”已见于《周髀算经》。",
+            sourceText: "勾股术曰：勾股各自乘，并而开方除之，即弦。",
+            modernText: "勾股关系来自土地丈量、城墙高度和河宽一类问题。《九章算术》勾股章把多种测量收成可以计算的步骤。现代写法 a² + b² = c² 是释义，不是汉代的记法。",
+            demoNote: "左侧 SVG 会随滑块改变勾和股。图形、滑块和小数都是本馆的辅助演示。",
+            imageUrl: "",
+            imageCaption: "",
+            demoHref: "classics.html#gougu",
+            pageUrl: "classics.html#gougu",
+            points: "图形和数值连在一起\n可以估计不能直接到达的距离\n《九章算术》勾股章有成套题目",
+            diagram: "gougu",
+            sortOrder: 1
+        },
+        {
+            kind: "EXHIBIT",
+            slug: "yanghui",
+            title: "杨辉三角",
+            subtitle: "《详解九章算法》中的三角数表",
+            summary: "每个数等于它肩上左右两数之和。它同时是组合数表，也是二项式展开的系数表。",
+            sourceNote: "杨辉记录的图注。他写明这张表出自贾宪所用之术。",
+            sourceText: "出释锁算书，贾宪用此术。",
+            modernText: "第 n 行从 0 数起，第 k 个数是从 n 个里取 k 个的方法数。在开方里，这张表用来找各次项的系数。叫“杨辉三角”是后世的名称，杨辉本人没有声称发明它。",
+            demoNote: "页面上的数表由脚本逐行相加画出来，行数可以增减。它是辅助演示，不是宋本的影印。",
+            imageUrl: "",
+            imageCaption: "",
+            demoHref: "classics.html#yanghui",
+            pageUrl: "classics.html#yanghui",
+            points: "每一行的和都是 2 的幂\n斜向可以读出自然数、三角数\n同一张表里有递推、组合和二项展开",
+            diagram: "pascal",
+            sortOrder: 2
+        },
+        {
+            kind: "EXHIBIT",
+            slug: "circle",
+            title: "割圆术",
+            subtitle: "刘徽的割圆与圆周率逼近",
+            summary: "用圆内接正多边形逼近圆。边数越多，多边形周长越接近圆周，得到的圆周率就越精细。",
+            sourceNote: "刘徽《九章算术注》。祖冲之后来把界限推得更紧，方法细节随《缀术》失传。",
+            sourceText: "割之弥细，所失弥少。割之又割，以至于不可割，则与圆合体而无所失矣。",
+            modernText: "单位圆内接正 n 边形的半周长是 n·sin(π/n)，这就是演示里用来估计 π 的现代公式。刘徽用的是勾股和开方，不是这句正弦。页上同时给出两个数，是为了让误差看得见。",
+            demoNote: "滑块和“边数加倍”按钮是辅助演示。正 96 边形已经很接近圆，再往上屏幕上几乎看不出折线，所以演示停在 96 边。",
+            imageUrl: "",
+            imageCaption: "",
+            demoHref: "classics.html#circle",
+            pageUrl: "classics.html#circle",
+            points: "用直线段逼近曲线\n边数加倍后误差变小\n为后来更密的圆周率准备了方法",
+            diagram: "circle",
+            sortOrder: 3
+        },
+        {
+            kind: "EXHIBIT",
+            slug: "abacus",
+            title: "传统算盘",
+            subtitle: "上二下五，靠梁为数",
+            summary: "算盘是日用计算工具。上珠一颗当五，下珠一颗当一，靠梁的珠子才计入读数，满十向左进一档。",
+            sourceNote: "关于算盘的史料边界。算筹比算盘早，不要把明代才普及的算盘写进汉代算经。",
+            sourceText: "旧题汉徐岳、北周甄鸾注的《数术记遗》列举过“珠算”，这部书的年代学界仍有讨论。今天常见的上二下五算盘，是宋元以后逐渐定型、明代广泛使用的工具。算经里的大算题，主要仍用算筹。",
+            modernText: "本页算盘有若干档。每一档的读数是上珠与下珠之和，左边的档是更高的十的幂。这和十进位值制是同一条原则，只是工具从算筹换成了算珠。",
+            demoNote: "点击或拖动算珠，是本馆做的辅助演示。口诀和速度不是某一条史料原文。窄屏可以横向滑动，看完各档。",
+            imageUrl: "assets/images/abacus/abacus-body-paper.png",
+            imageCaption: "算盘盘面为馆内绘制的教具图。",
+            demoHref: "abacus.html",
+            pageUrl: "abacus.html",
+            points: "上珠记五，下珠记一\n靠梁为入数\n算盘晚于算筹",
+            diagram: "abacus",
+            sortOrder: 4
+        },
+        {
+            kind: "EXHIBIT",
+            slug: "puzzle",
+            title: "华容道",
+            subtitle: "移形换位的滑块游戏",
+            summary: "华容道是明清以来流传的滑块游戏。棋子姓名来自《三国演义》的故事，不是任何一部算经里的题目。",
+            sourceNote: "本馆不把华容道写成算经原文。它放在互动区，是为了让“步数”和“位置”可以被亲手移动。",
+            sourceText: "华容道没有对应的算书原文。棋盘、曹操、关羽这些名字来自小说和后来的玩具，不应引用成《九章》或《数书九章》的句子。",
+            modernText: "游戏规则本身是组合搜索：棋子只能滑进空格，每一步改变布局，目标是让曹操到达出口。它训练的是对空间和步数的感觉，不是某一种古代算法的复原。",
+            demoNote: "页面使用“横刀立马”开局。拖动、记步和通关提示都是辅助演示。人物图片是游戏棋子，不是历史肖像。",
+            imageUrl: "assets/images/puzzle/caocao.png",
+            imageCaption: "游戏棋子，不是历史人物肖像。",
+            demoHref: "puzzle.html",
+            pageUrl: "puzzle.html",
+            points: "滑块游戏，不是算经题目\n一步可以连过数格\n曹操到达底部正中即通关",
+            diagram: "none",
+            sortOrder: 5
+        }
+    ];
+
+    var survey = [
+        {
+            prompt: "你这次最先打开的是哪一类页面？",
+            options: ["首页", "发展史或人物", "典籍或互动演示", "留言、调查或个人页"]
+        },
+        {
+            prompt: "哪一种文字对你帮助最大？",
+            options: ["史料原文", "现代释义", "辅助演示", "三种都需要"]
+        },
+        {
+            prompt: "页面上的文字好不好读懂？",
+            options: ["清楚", "大体清楚", "偏难"]
+        },
+        {
+            prompt: "你是否还愿意继续往下看二级页面？",
+            options: ["愿意", "不确定", "不愿意"]
+        },
+        {
+            prompt: "如果只能再增加一类内容，你希望是哪一类？",
+            options: ["更多可核对的算题", "更多人物专题", "练习与自测", "维持现在的规模"]
+        }
+    ];
+
+    return {
+        items: items,
+        survey: survey
+    };
+});

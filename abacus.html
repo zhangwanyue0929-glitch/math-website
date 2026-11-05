@@ -7,6 +7,7 @@
     <title>算盘互动 - 算经千年</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/site.css">
     <link rel="stylesheet" href="css/abacus.css">
 </head>
 <body>
@@ -22,6 +23,9 @@
         <a href="classics.html">数学经典</a>
         <a class="active" href="abacus.html">算盘互动</a>
         <a href="puzzle.html">华容道</a>
+        <a class="nav-minor" href="board.html">留言</a>
+        <a class="nav-minor" href="survey.html">调查</a>
+        <a class="nav-minor" href="login.html" data-nav-account>登录</a>
     </nav>
 </header>
 
@@ -54,11 +58,31 @@
             <button id="resetAbacus" type="button">清盘</button>
         </aside>
     </section>
+    <section class="exhibit-note" data-entry data-kind="exhibit" data-slug="abacus">
+        <p id="entryStatus" class="entry-status" role="status"></p>
+        <h2>展签</h2>
+        <section class="block block-source">
+            <h2>史料原文</h2>
+            <p data-field="sourceNote">关于算盘的史料边界。算筹比算盘早，不要把明代才普及的算盘写进汉代算经。</p>
+            <blockquote data-field="sourceText">旧题汉徐岳、北周甄鸾注的《数术记遗》列举过“珠算”，这部书的年代学界仍有讨论。今天常见的上二下五算盘，是宋元以后逐渐定型、明代广泛使用的工具。算经里的大算题，主要仍用算筹。</blockquote>
+        </section>
+        <section class="block block-modern">
+            <h2>现代释义</h2>
+            <div data-field="modernText" data-multiline="1"><p>本页算盘有若干档。每一档的读数是上珠与下珠之和，左边的档是更高的十的幂。这和十进位值制是同一条原则，只是工具从算筹换成了算珠。</p></div>
+        </section>
+        <section class="block block-demo">
+            <h2>辅助演示</h2>
+            <p data-field="demoNote">点击或拖动算珠，是本馆做的辅助演示。口诀和速度不是某一条史料原文。窄屏可以横向滑动，看完各档。</p>
+        </section>
+        <button id="favBtn" class="btn gap-top" type="button">收藏此页</button>
+    </section>
 </main>
 
 <script src="js/api.js"></script>
+<script src="js/ui.js"></script>
 <script src="js/nav.js"></script>
 <script src="js/abacus.js"></script>
+<script src="js/entry.js"></script>
 <script src="js/particle.js"></script>
 </body>
 </html>

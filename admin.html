@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <title>展项管理 - 算经千年</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body data-admin="content">
+<header class="navbar">
+    <a class="logo" href="index.html">算经千年</a>
+    <button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav aria-label="主导航">
+        <a href="index.html">首页</a>
+        <a href="history.html">发展史</a>
+        <a href="mathematicians.html">数学家</a>
+        <a href="classics.html">数学经典</a>
+        <a href="abacus.html">算盘互动</a>
+        <a href="puzzle.html">华容道</a>
+        <a class="nav-minor" href="board.html">留言</a>
+        <a class="nav-minor" href="survey.html">调查</a>
+        <a class="nav-minor" href="login.html" data-nav-account>登录</a>
+    </nav>
+</header>
+<main class="plain-page page-plain">
+    <h1 class="page-title">展项管理</h1>
+    <p class="lead">改的是数据库里的文字和图片地址。互动演示的图形仍写在页面脚本里，避免后台存进可执行的 HTML。</p>
+    <p id="adminNotice" class="notice" hidden></p>
+    <div class="admin-shell">
+        <aside class="admin-nav">
+            <a class="active" href="admin.html">展项</a>
+            <a href="admin-messages.html">留言审核</a>
+            <a href="admin-users.html">用户</a>
+            <a href="admin-survey.html">调查</a>
+            <a href="catalog.html">查看目录</a>
+        </aside>
+        <section>
+            <div class="panel">
+                <label class="field">按类别查看
+                    <select id="adminKind">
+                        <option value="">全部</option>
+                        <option value="mathematician">数学家</option>
+                        <option value="era">分期</option>
+                        <option value="classic">典籍</option>
+                        <option value="exhibit">互动展项</option>
+                    </select>
+                </label>
+                <div class="table-wrap gap-top">
+                    <table id="contentTable" class="data">
+                        <thead><tr><th>类别</th><th>标题</th><th>状态</th><th></th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div id="contentPager" class="pager"></div>
+            </div>
+            <form id="contentForm" class="panel editor gap-top">
+                <input id="editingId" type="hidden">
+                <div class="sheet-actions">
+                    <button id="newContent" class="btn btn-ghost" type="button">新建一条</button>
+                </div>
+                <label class="field">类别
+                    <select name="kind">
+                        <option value="mathematician">数学家</option>
+                        <option value="era">分期</option>
+                        <option value="classic">典籍</option>
+                        <option value="exhibit">互动展项</option>
+                    </select>
+                </label>
+                <label class="field">编号（小写字母、数字、短横线）<input name="slug" required maxlength="40"></label>
+                <label class="field">标题<input name="title" required maxlength="40"></label>
+                <label class="field">副题<input name="subtitle" maxlength="80"></label>
+                <label class="field">摘要<textarea name="summary" required></textarea></label>
+                <label class="field">史料出处<input name="sourceNote" maxlength="200"></label>
+                <label class="field">史料原文<textarea name="sourceText" required></textarea></label>
+                <label class="field">现代释义<textarea name="modernText" required></textarea></label>
+                <label class="field">辅助演示说明<textarea name="demoNote" required></textarea></label>
+                <label class="field">要点（一行一条）<textarea name="points"></textarea></label>
+                <label class="field">图片地址<input name="imageUrl" placeholder="assets/... 或 media/..."></label>
+                <div class="inline-actions">
+                    <input id="imageFile" type="file" accept="image/jpeg,image/png,image/gif,image/webp">
+                    <button id="uploadBtn" class="small-btn" type="button">上传图片</button>
+                </div>
+                <label class="field">图片说明<input name="imageCaption" maxlength="120"></label>
+                <label class="field">相关页面<input name="demoHref" placeholder="classics.html#gougu"></label>
+                <label class="field">目录链接<input name="pageUrl" placeholder="person-liuhui.html"></label>
+                <label class="field">示意图名称<input name="diagram" maxlength="20" placeholder="gougu、circle、pascal，可留空"></label>
+                <label class="field">排序<input name="sortOrder" type="number" value="0"></label>
+                <label class="checkline"><input name="published" type="checkbox" checked> 公开</label>
+                <button class="btn" type="submit">保存展项</button>
+            </form>
+        </section>
+    </div>
+</main>
+<script src="js/api.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

@@ -10,6 +10,10 @@
             title: "勾股定理",
             text: "中国古代把直角三角形中较短的直角边称为“勾”，较长的直角边称为“股”，斜边称为“弦”。勾平方与股平方相加，等于弦平方。",
             detail: "勾股定理来自土地丈量、城墙高度和河宽一类实际问题。《周髀算经》已有“勾三股四弦五”，《九章算术》勾股章则把多种测量问题收成可以计算的算法。",
+            sourceNote: "《九章算术》勾股术。特例“勾三股四弦五”已见于《周髀算经》。",
+            sourceText: "勾股术曰：勾股各自乘，并而开方除之，即弦。",
+            bookHref: "classic-jiuzhang.html",
+            bookLabel: "阅读《九章算术》",
             points: [
                 "把图形和数值连在一起，是古代测量术的基本工具。",
                 "可以估算不能直接到达的距离，例如隔河测宽。",
@@ -35,6 +39,10 @@
             title: "杨辉三角",
             text: "杨辉三角层层相加：每个数等于它肩上左右两数之和。它同时是组合数和二项式展开的系数表。",
             detail: "在中国数学里，这张表常用于开方作法。第 n 行从 0 数起，第 k 个数就是从 n 个里取 k 个的方法数。",
+            sourceNote: "杨辉所录“开方作法本源”图注。他写明这张表贾宪已经在用。",
+            sourceText: "出释锁算书，贾宪用此术。",
+            bookHref: "person-yanghui.html",
+            bookLabel: "阅读杨辉专题",
             points: [
                 "每一行的和都是 2 的幂。",
                 "斜着读，可以看到自然数、三角数等数列。",
@@ -53,10 +61,14 @@
             title: "割圆术",
             text: "割圆术用圆内接正多边形逼近圆。边数越多，多边形周长越接近圆周长，得到的圆周率就越精细。",
             detail: "刘徽注解《九章算术》时从正六边形开始，不断把边数加倍，说“割之弥细，所失弥少”。这是极限思想的早期表达。",
+            sourceNote: "刘徽《九章算术注》圆田术注。",
+            sourceText: "割之弥细，所失弥少。割之又割，以至于不可割，则与圆合体而无所失矣。",
+            bookHref: "person-liuhui.html",
+            bookLabel: "阅读刘徽专题",
             points: [
                 "用算得出的直线段去逼近曲线。",
                 "边数加倍以后，误差明显变小。",
-                "为祖冲之后来把圆周率算到小数点后七位准备了方法。"
+                "为后来更密的圆周率准备了方法，但《缀术》已经失传。"
             ],
             html: ''
                 + '<div class="circle-demo">'
@@ -83,19 +95,50 @@
         });
     });
 
-    function loadClassic(key) {
+    var remote = {};
+
+    function shown(key) {
         var item = classics[key];
+        var hit = remote[key];
+        if (!hit) return item;
+        var copy = {};
+        Object.keys(item).forEach(function (name) { copy[name] = item[name]; });
+        if (hit.subtitle) copy.kicker = hit.subtitle;
+        if (hit.title) copy.title = hit.title;
+        if (hit.summary) copy.text = hit.summary;
+        if (hit.modernText) copy.detail = hit.modernText;
+        if (hit.sourceNote) copy.sourceNote = hit.sourceNote;
+        if (hit.sourceText) copy.sourceText = hit.sourceText;
+        if (hit.points) {
+            copy.points = hit.points.split("\n").filter(function (line) { return line.trim(); });
+        }
+        return copy;
+    }
+
+    function loadClassic(key) {
+        var item = shown(key);
         document.getElementById("classic-kicker").textContent = item.kicker;
         document.getElementById("classic-title").textContent = item.title;
         document.getElementById("classic-text").textContent = item.text;
         document.getElementById("classic-detail").textContent = item.detail;
-        document.getElementById("classic-points").innerHTML = item.points.map(function (point) {
-            return "<li>" + point + "</li>";
-        }).join("");
+        document.getElementById("classic-source-note").textContent = item.sourceNote || "";
+        document.getElementById("classic-source").textContent = item.sourceText || "";
+        var book = document.getElementById("classic-book");
+        book.textContent = item.bookLabel;
+        book.setAttribute("href", item.bookHref);
+        var list = document.getElementById("classic-points");
+        list.innerHTML = "";
+        item.points.forEach(function (point) {
+            var li = document.createElement("li");
+            li.textContent = point;
+            list.appendChild(li);
+        });
+        /* 演示图形只来自本文件，不从数据库取 HTML。 */
         document.getElementById("demo-container").innerHTML = item.html;
         if (key === "gougu") initGougu();
         if (key === "yanghui") initPascal();
         if (key === "circle") initCircle();
+        if (window.history && history.replaceState) history.replaceState(null, "", "#" + key);
     }
 
     function initGougu() {
@@ -205,5 +248,20 @@
         draw();
     }
 
-    loadClassic("gougu");
+    var start = "gougu";
+    var hash = (location.hash || "").replace(/^#/, "");
+    if (classics[hash]) start = hash;
+    buttons.forEach(function (button) {
+        button.classList.toggle("active", button.dataset.classic === start);
+    });
+    loadClassic(start);
+
+    SuanjingAPI.ready.then(function () {
+        if (!SuanjingAPI.state.online) return;
+        SuanjingAPI.request("content?kind=exhibit&pageSize=20").then(function (data) {
+            data.items.forEach(function (item) { remote[item.slug] = item; });
+            var current = document.querySelector(".classic-btn.active");
+            if (current) loadClassic(current.dataset.classic);
+        }).catch(function () {});
+    });
 })();

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <title>周髀算经 - 算经千年</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<header class="navbar"><a class="logo" href="index.html">算经千年</a><button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false"><span></span><span></span><span></span></button><nav aria-label="主导航"><a href="index.html">首页</a><a href="history.html">发展史</a><a href="mathematicians.html">数学家</a><a class="active" href="classics.html">数学经典</a><a href="abacus.html">算盘互动</a><a href="puzzle.html">华容道</a><a class="nav-minor" href="board.html">留言</a><a class="nav-minor" href="survey.html">调查</a><a class="nav-minor" href="login.html" data-nav-account>登录</a></nav></header>
+<main class="article-page page-pattern">
+    <p class="crumb"><a href="index.html">首页</a> / <a href="classics.html">数学经典</a> / <span>周髀算经</span></p>
+    <p id="entryStatus" class="entry-status" role="status"></p>
+    <article class="sheet" data-entry data-kind="classic" data-slug="zhoubi">
+        <header class="sheet-head">
+            <p class="eyebrow" data-field="subtitle">战国至汉代成书的天文数学书</p>
+            <h1 data-field="title">周髀算经</h1>
+            <p class="summary" data-field="summary">现存最早系统使用勾股测量的著作之一。商高对周公问，留下了“勾三股四弦五”。</p>
+            <div class="sheet-actions"><button class="btn" id="favBtn" type="button">收藏此页</button><a class="btn btn-ghost" data-field-href="demoHref" href="classics.html#gougu">打开相关页面</a></div>
+        </header>
+        <div class="sheet-grid">
+            <div class="sheet-side"><div class="diagram-wrap"><p>辅助演示图</p><svg class="math-svg" viewBox="0 0 320 220" role="img" aria-label="勾三股四弦五示意"><polyline points="40,180 40,60 200,180 40,180" fill="rgba(139,58,50,0.08)" stroke="#8b3a32" stroke-width="3"/><text x="18" y="126" fill="#8b3a32" font-size="16">勾</text><text x="108" y="204" fill="#8b3a32" font-size="16">股</text><text x="124" y="112" fill="#8b3a32" font-size="16">弦</text></svg></div></div>
+            <div class="sheet-body">
+                <section class="block block-source"><h2>史料原文</h2><p class="source-note" data-field="sourceNote">《周髀算经》卷上，商高答周公。</p><blockquote data-field="sourceText">数之法出于圆方。圆出于方，方出于矩，矩出于九九八十一。故折矩以为勾广三，股修四，径隅五。</blockquote></section>
+                <section class="block block-modern"><h2>现代释义</h2><div data-field="modernText" data-multiline="1"><p>“勾广三，股修四，径隅五”是 3² + 4² = 5² 的特例。书里用勾股讨论表杆测日影、日高这一类问题。那些天文数字建立在盖天说的模型上，模型变了，数字就不能直接当成今天测到的日地距离。</p><p>读这本书时要分开两层：勾股关系本身可以在图形里验证；书里的宇宙尺寸是历史模型，不是本馆要证明的物理结论。</p></div></section>
+                <section class="block block-demo"><h2>辅助演示</h2><p data-field="demoNote">勾股演示可以把勾、股拖成 3 和 4，看到弦长为 5。这是用现代页面重做的特例，不是《周髀》的书影。</p></section>
+                <ul class="point-list" data-field-list="points"><li>勾三、股四、径隅五</li><li>测量传统与天文模型要分开看</li><li>成书约在战国至汉代</li></ul>
+            </div>
+        </div>
+    </article>
+    <footer class="site-foot"><a href="catalog.html">馆藏目录</a><a href="board.html">留言板</a><a href="survey.html">参观调查</a></footer>
+</main>
+<script src="js/api.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/entry.js"></script>
+<script src="js/particle.js"></script>
+</body>
+</html>

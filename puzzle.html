@@ -7,6 +7,7 @@
     <title>华容道 - 算经千年</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/site.css">
     <link rel="stylesheet" href="css/puzzle.css">
 </head>
 <body>
@@ -22,6 +23,9 @@
         <a href="classics.html">数学经典</a>
         <a href="abacus.html">算盘互动</a>
         <a class="active" href="puzzle.html">华容道</a>
+        <a class="nav-minor" href="board.html">留言</a>
+        <a class="nav-minor" href="survey.html">调查</a>
+        <a class="nav-minor" href="login.html" data-nav-account>登录</a>
     </nav>
 </header>
 
@@ -47,11 +51,31 @@
             <button id="restartPuzzle" type="button">重新开始</button>
         </aside>
     </section>
+    <section class="exhibit-note" data-entry data-kind="exhibit" data-slug="puzzle">
+        <p id="entryStatus" class="entry-status" role="status"></p>
+        <h2>展签</h2>
+        <section class="block block-source">
+            <h2>史料原文</h2>
+            <p data-field="sourceNote">本馆不把华容道写成算经原文。它放在互动区，是为了让“步数”和“位置”可以被亲手移动。</p>
+            <blockquote data-field="sourceText">华容道没有对应的算书原文。棋盘、曹操、关羽这些名字来自小说和后来的玩具，不应引用成《九章》或《数书九章》的句子。</blockquote>
+        </section>
+        <section class="block block-modern">
+            <h2>现代释义</h2>
+            <div data-field="modernText" data-multiline="1"><p>游戏规则本身是组合搜索：棋子只能滑进空格，每一步改变布局，目标是让曹操到达出口。它训练的是对空间和步数的感觉，不是某一种古代算法的复原。</p></div>
+        </section>
+        <section class="block block-demo">
+            <h2>辅助演示</h2>
+            <p data-field="demoNote">页面使用“横刀立马”开局。拖动、记步和通关提示都是辅助演示。人物图片是游戏棋子，不是历史肖像。</p>
+        </section>
+        <button id="favBtn" class="btn gap-top" type="button">收藏此页</button>
+    </section>
 </main>
 
 <script src="js/api.js"></script>
+<script src="js/ui.js"></script>
 <script src="js/nav.js"></script>
 <script src="js/puzzle.js"></script>
+<script src="js/entry.js"></script>
 <script src="js/particle.js"></script>
 </body>
 </html>
