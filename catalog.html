@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <title>馆藏目录 - 算经千年</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<header class="navbar">
+    <a class="logo" href="index.html">算经千年</a>
+    <button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+    <nav aria-label="主导航">
+        <a href="index.html">首页</a>
+        <a href="history.html">发展史</a>
+        <a href="mathematicians.html">数学家</a>
+        <a href="classics.html">数学经典</a>
+        <a href="abacus.html">算盘互动</a>
+        <a href="puzzle.html">华容道</a>
+        <a class="nav-minor" href="board.html">留言</a>
+        <a class="nav-minor" href="survey.html">调查</a>
+        <a class="nav-minor" href="login.html" data-nav-account>登录</a>
+    </nav>
+</header>
+<main class="plain-page page-plain">
+    <h1 class="page-title">馆藏目录</h1>
+    <p class="lead">人物、分期、典籍和互动展项放在同一份目录里，每页 6 条。</p>
+    <p id="catalogNotice" class="notice" hidden></p>
+    <form id="catalogFilter" class="filters">
+        <label class="field">类别
+            <select id="kindFilter">
+                <option value="">全部</option>
+                <option value="MATHEMATICIAN">数学家</option>
+                <option value="ERA">分期</option>
+                <option value="CLASSIC">典籍</option>
+                <option value="EXHIBIT">互动展项</option>
+            </select>
+        </label>
+        <label class="field">标题
+            <input id="qFilter" type="search" maxlength="40" placeholder="例如：刘徽">
+        </label>
+        <label class="field">操作
+            <button class="btn" type="submit">筛选</button>
+        </label>
+    </form>
+    <div id="catalogList" class="catalog-grid"></div>
+    <div id="catalogPager" class="pager" aria-label="目录分页"></div>
+</main>
+<script src="js/content-data.js"></script>
+<script src="js/api.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/catalog.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <title>秦九韶 - 算经千年</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<header class="navbar"><a class="logo" href="index.html">算经千年</a><button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false"><span></span><span></span><span></span></button><nav aria-label="主导航"><a href="index.html">首页</a><a href="history.html">发展史</a><a class="active" href="mathematicians.html">数学家</a><a href="classics.html">数学经典</a><a href="abacus.html">算盘互动</a><a href="puzzle.html">华容道</a><a class="nav-minor" href="board.html">留言</a><a class="nav-minor" href="survey.html">调查</a><a class="nav-minor" href="login.html" data-nav-account>登录</a></nav></header>
+<main class="article-page page-pattern">
+    <p class="crumb"><a href="index.html">首页</a> / <a href="mathematicians.html">数学家</a> / <span>秦九韶</span></p>
+    <p id="entryStatus" class="entry-status" role="status"></p>
+    <article class="sheet" data-entry data-kind="mathematician" data-slug="qinjiushao">
+        <header class="sheet-head">
+            <p class="eyebrow" data-field="subtitle">南宋 · 《数书九章》成书于 1247 年</p>
+            <h1 data-field="title">秦九韶</h1>
+            <p class="summary" data-field="summary">南宋数学家。著《数书九章》，系统写出一次同余式组的大衍求一术，以及高次方程的数值解法。</p>
+            <div class="sheet-actions"><button class="btn" id="favBtn" type="button">收藏此页</button><a class="btn btn-ghost" data-field-href="demoHref" href="classic-shushu.html">打开相关页面</a></div>
+        </header>
+        <div class="sheet-grid">
+            <div class="sheet-side"><figure class="portrait"><img data-field-src="imageUrl" src="assets/images/mathematicians/qinjiushao.jpg" alt="秦九韶"><figcaption data-field="imageCaption">后世绘制的人物画像，只帮助辨认专题，不是当时留下的写真。</figcaption></figure><div class="diagram-wrap"><p>辅助演示图</p><svg class="math-svg" viewBox="0 0 320 180" role="img" aria-label="大衍求一术的四个位置"><rect x="40" y="24" width="110" height="60" fill="#fbf6e8" stroke="#8b3a32"/><rect x="170" y="24" width="110" height="60" fill="#fbf6e8" stroke="#8b3a32"/><rect x="40" y="96" width="110" height="60" fill="#fbf6e8" stroke="#8b3a32"/><rect x="170" y="96" width="110" height="60" fill="#fbf6e8" stroke="#8b3a32"/><text x="95" y="60" text-anchor="middle" fill="#8b3a32" font-size="16">左上 · 天元</text><text x="225" y="60" text-anchor="middle" fill="#8b3a32" font-size="16">右上 · 奇</text><text x="95" y="132" text-anchor="middle" fill="#8b3a32" font-size="16">左下</text><text x="225" y="132" text-anchor="middle" fill="#8b3a32" font-size="16">右下 · 定</text></svg></div></div>
+            <div class="sheet-body">
+                <section class="block block-source"><h2>史料原文</h2><p class="source-note" data-field="sourceNote">《数书九章》大衍类“大衍求一术”术文节引。</p><blockquote data-field="sourceText">置奇右上，定居右下，天元一于左上。先以右上除右下，所得商数与左上一相生，入左下。然后乃以右行上下，以少除多，递互除之。须使右上末后奇一而止。乃验左上所得，以为乘率。</blockquote></section>
+                <section class="block block-modern"><h2>现代释义</h2><div data-field="modernText" data-multiline="1"><p>大衍求一术解决的是一类“几个除数分别去除，余数已知，求原来的数”的问题，和今天的一次同余式组是同一类数学对象。秦九韶给出的是一套用算筹可以执行的算法，不是后来用现代符号写成的中国剩余定理。</p><p>正负开方术则是求高次方程数值根的方法，和后来的霍纳法思路相近。本馆只说明这个对应，不把十九世纪的写法回写成南宋原文。他的生卒年各书略有出入，本馆只强调可核对的成书年：1247 年。</p></div></section>
+                <section class="block block-demo"><h2>辅助演示</h2><p data-field="demoNote">本页下方的方格是本馆画的示意，帮助看“右上、右下、左上”这几个位置，不能代替术文本身的演算。</p></section>
+                <ul class="point-list" data-field-list="points"><li>大衍求一术</li><li>正负开方术</li><li>《数书九章》（1247）</li></ul>
+            </div>
+        </div>
+    </article>
+    <footer class="site-foot"><a href="catalog.html">馆藏目录</a><a href="board.html">留言板</a><a href="survey.html">参观调查</a></footer>
+</main>
+<script src="js/api.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/entry.js"></script>
+<script src="js/particle.js"></script>
+</body>
+</html>

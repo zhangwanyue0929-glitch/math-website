@@ -8,8 +8,8 @@
         zuchongzhi: {
             name: "祖冲之",
             image: "assets/images/mathematicians/zuchongzhi.jpg",
-            text: "南北朝杰出的数学家与天文学家，首次将圆周率精确到小数点后七位。",
-            achievements: ["圆周率 3.1415926～3.1415927", "《缀术》", "大明历"]
+            text: "南北朝数学家、天文学家。史书记载他把圆周率夹在 3.1415926 与 3.1415927 之间，并给出密率 355/113、约率 22/7。",
+            achievements: ["盈朒二限：3.1415926 < π < 3.1415927", "密率 355/113，约率 22/7", "《缀术》已佚"]
         },
         liuhui: {
             name: "刘徽",
@@ -49,11 +49,19 @@
         textEl.textContent = person.text;
         imageEl.src = person.image;
         imageEl.alt = person.name;
-        achievementEl.innerHTML = "<h3>代表成就</h3><ul>" +
-            person.achievements.map(function (item) {
-                return "<li>" + item + "</li>";
-            }).join("") +
-            "</ul>";
+        achievementEl.innerHTML = "";
+        var heading = document.createElement("h3");
+        heading.textContent = "代表成就";
+        var list = document.createElement("ul");
+        person.achievements.forEach(function (item) {
+            var li = document.createElement("li");
+            li.textContent = item;
+            list.appendChild(li);
+        });
+        achievementEl.appendChild(heading);
+        achievementEl.appendChild(list);
+        var more = document.getElementById("person-more");
+        if (more) more.setAttribute("href", "person-" + key + ".html");
     }
 
     buttons.forEach(function (button) {
@@ -65,4 +73,24 @@
     });
 
     render("zuchongzhi");
+
+    /* 服务器开着时，用数据库里的摘要替换这五位的静态介绍。多出来的人物不塞进画像栏。 */
+    SuanjingAPI.ready.then(function () {
+        if (!SuanjingAPI.state.online) return;
+        SuanjingAPI.request("content?kind=mathematician&pageSize=20").then(function (data) {
+            data.items.forEach(function (item) {
+                if (!people[item.slug]) return;
+                people[item.slug].name = item.title;
+                people[item.slug].text = item.summary;
+                if (item.imageUrl) people[item.slug].image = item.imageUrl;
+                if (item.points) {
+                    people[item.slug].achievements = item.points.split("\n").filter(function (line) {
+                        return line.trim();
+                    });
+                }
+            });
+            var active = document.querySelector(".person-btn.active");
+            render(active ? active.dataset.person : "zuchongzhi");
+        }).catch(function () {});
+    });
 })();

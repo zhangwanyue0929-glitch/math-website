@@ -39,7 +39,32 @@
             });
             card.classList.add("is-selected");
             card.setAttribute("aria-pressed", "true");
-            detail.innerHTML = "<h2>" + era.title + "</h2><p>" + era.text + "</p>";
+            detail.innerHTML = "";
+            var heading = document.createElement("h2");
+            heading.textContent = era.title;
+            var paragraph = document.createElement("p");
+            paragraph.textContent = era.text;
+            var link = document.createElement("a");
+            link.className = "history-more";
+            link.href = "era-" + card.dataset.era + ".html";
+            link.textContent = "阅读本期详情";
+            detail.appendChild(heading);
+            detail.appendChild(paragraph);
+            detail.appendChild(link);
         });
+    });
+
+    SuanjingAPI.ready.then(function () {
+        if (!SuanjingAPI.state.online) return;
+        SuanjingAPI.request("content?kind=era&pageSize=20").then(function (data) {
+            data.items.forEach(function (item) {
+                if (eras[item.slug]) {
+                    eras[item.slug].title = item.title;
+                    eras[item.slug].text = item.summary;
+                }
+            });
+            var selected = document.querySelector(".history-card.is-selected");
+            if (selected) selected.click();
+        }).catch(function () {});
     });
 })();

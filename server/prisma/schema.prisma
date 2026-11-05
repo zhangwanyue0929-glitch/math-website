@@ -1,0 +1,152 @@
+// 算经千年的业务库。
+// 数据库只存业务数据和媒体地址；图片文件放在 server/uploads 或仓库的 assets 里。
+// 会话也放在这张 MySQL 表中，服务器重启后登录状态还在。
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum MessageStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum ContentKind {
+  MATHEMATICIAN
+  CLASSIC
+  ERA
+  EXHIBIT
+}
+
+model User {
+  id                 Int            @id @default(autoincrement())
+  username           String         @unique @db.VarChar(32)
+  email              String         @unique @db.VarChar(120)
+  passwordHash       String         @db.VarChar(100)
+  role               Role           @default(USER)
+  disabled           Boolean        @default(false)
+  securityQuestion   String         @db.VarChar(80)
+  securityAnswerHash String         @db.VarChar(100)
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+  messages           Message[]
+  favourites         Favourite[]
+  surveyAnswers      SurveyAnswer[]
+  records            VisitRecord[]
+
+  @@map("users")
+}
+
+/// express-session 的持久化存储。data 是会话 JSON，里面没有明文密码。
+model Session {
+  sid       String   @id @db.VarChar(128)
+  data      String   @db.MediumText
+  expiresAt DateTime
+
+  @@index([expiresAt])
+  @@map("sessions")
+}
+
+model ContentItem {
+  id           Int         @id @default(autoincrement())
+  kind         ContentKind
+  slug         String      @db.VarChar(40)
+  title        String      @db.VarChar(80)
+  subtitle     String      @default("") @db.VarChar(160)
+  summary      String      @db.Text
+  sourceNote   String      @default("") @db.VarChar(240)
+  sourceText   String      @db.Text
+  modernText   String      @db.Text
+  demoNote     String      @db.Text
+  imageUrl     String      @default("") @db.VarChar(255)
+  imageCaption String      @default("") @db.VarChar(200)
+  demoHref     String      @default("") @db.VarChar(160)
+  pageUrl      String      @default("") @db.VarChar(160)
+  points       String      @default("") @db.VarChar(800)
+  diagram      String      @default("") @db.VarChar(20)
+  sortOrder    Int         @default(0)
+  published    Boolean     @default(true)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  favourites   Favourite[]
+  records      VisitRecord[]
+
+  @@unique([kind, slug])
+  @@index([kind, published, sortOrder])
+  @@map("content_items")
+}
+
+model Message {
+  id         Int           @id @default(autoincrement())
+  userId     Int
+  content    String        @db.VarChar(500)
+  status     MessageStatus @default(PENDING)
+  reply      String        @default("") @db.VarChar(500)
+  createdAt  DateTime      @default(now())
+  reviewedAt DateTime?
+  user       User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([status, createdAt])
+  @@index([userId, createdAt])
+  @@map("messages")
+}
+
+model SurveyQuestion {
+  id        Int            @id @default(autoincrement())
+  prompt    String         @db.VarChar(200)
+  options   String         @db.Text
+  sortOrder Int            @default(0)
+  active    Boolean        @default(true)
+  answers   SurveyAnswer[]
+
+  @@map("survey_questions")
+}
+
+model SurveyAnswer {
+  id         Int            @id @default(autoincrement())
+  userId     Int
+  questionId Int
+  choice     String         @db.VarChar(80)
+  createdAt  DateTime       @default(now())
+  user       User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question   SurveyQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, questionId])
+  @@map("survey_answers")
+}
+
+model Favourite {
+  id        Int         @id @default(autoincrement())
+  userId    Int
+  contentId Int
+  createdAt DateTime    @default(now())
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  content   ContentItem @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, contentId])
+  @@index([userId, createdAt])
+  @@map("favourites")
+}
+
+model VisitRecord {
+  id        Int         @id @default(autoincrement())
+  userId    Int
+  contentId Int
+  createdAt DateTime    @default(now())
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  content   ContentItem @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@map("visit_records")
+}

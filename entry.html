@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <title>展项 - 算经千年</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<header class="navbar">
+    <a class="logo" href="index.html">算经千年</a>
+    <button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+    <nav aria-label="主导航">
+        <a href="index.html">首页</a>
+        <a href="history.html">发展史</a>
+        <a href="mathematicians.html">数学家</a>
+        <a href="classics.html">数学经典</a>
+        <a href="abacus.html">算盘互动</a>
+        <a href="puzzle.html">华容道</a>
+        <a class="nav-minor" href="board.html">留言</a>
+        <a class="nav-minor" href="survey.html">调查</a>
+        <a class="nav-minor" href="login.html" data-nav-account>登录</a>
+    </nav>
+</header>
+<main class="article-page page-pattern">
+    <p class="crumb"><a href="catalog.html">馆藏目录</a> / <span>展项</span></p>
+    <p id="entryStatus" class="entry-status" role="status"></p>
+    <article id="dynamicArticle" class="sheet" hidden>
+        <header class="sheet-head">
+            <p id="d-sub" class="eyebrow"></p>
+            <h1 id="d-title"></h1>
+            <p id="d-summary" class="summary"></p>
+        </header>
+        <img id="d-image" alt="" hidden>
+        <section class="block block-source"><h2>史料原文</h2><p id="d-source-note" class="source-note"></p><blockquote id="d-source"></blockquote></section>
+        <section class="block block-modern"><h2>现代释义</h2><div id="d-modern"></div></section>
+        <section class="block block-demo"><h2>辅助演示</h2><p id="d-demo"></p></section>
+        <ul id="d-points" class="point-list"></ul>
+    </article>
+</main>
+<script src="js/api.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/dynamic-entry.js"></script>
+</body>
+</html>

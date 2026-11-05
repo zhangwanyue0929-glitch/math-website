@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <title>刘徽 - 算经千年</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<header class="navbar"><a class="logo" href="index.html">算经千年</a><button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false"><span></span><span></span><span></span></button><nav aria-label="主导航"><a href="index.html">首页</a><a href="history.html">发展史</a><a class="active" href="mathematicians.html">数学家</a><a href="classics.html">数学经典</a><a href="abacus.html">算盘互动</a><a href="puzzle.html">华容道</a><a class="nav-minor" href="board.html">留言</a><a class="nav-minor" href="survey.html">调查</a><a class="nav-minor" href="login.html" data-nav-account>登录</a></nav></header>
+<main class="article-page page-pattern">
+    <p class="crumb"><a href="index.html">首页</a> / <a href="mathematicians.html">数学家</a> / <span>刘徽</span></p>
+    <p id="entryStatus" class="entry-status" role="status"></p>
+    <article class="sheet" data-entry data-kind="mathematician" data-slug="liuhui">
+        <header class="sheet-head">
+            <p class="eyebrow" data-field="subtitle">魏晋 · 263 年注《九章算术》</p>
+            <h1 data-field="title">刘徽</h1>
+            <p class="summary" data-field="summary">魏晋数学家。为《九章算术》作注，用出入相补说明面积和体积，并提出割圆术。</p>
+            <div class="sheet-actions"><button class="btn" id="favBtn" type="button">收藏此页</button><a class="btn btn-ghost" data-field-href="demoHref" href="classics.html#circle">打开相关页面</a></div>
+        </header>
+        <div class="sheet-grid">
+            <div class="sheet-side"><figure class="portrait"><img data-field-src="imageUrl" src="assets/images/mathematicians/liuhui.jpg" alt="刘徽"><figcaption data-field="imageCaption">后世绘制的人物画像，只帮助辨认专题，不是当时留下的写真。</figcaption></figure><div class="diagram-wrap"><p>辅助演示图</p><svg class="math-svg" viewBox="0 0 320 320" role="img" aria-label="圆内接正六边形"><circle cx="160" cy="160" r="120" fill="none" stroke="#c6a15b" stroke-width="2"/><polygon points="160,40 264,100 264,220 160,280 56,220 56,100" fill="rgba(139,58,50,0.1)" stroke="#8b3a32" stroke-width="2"/></svg></div></div>
+            <div class="sheet-body">
+                <section class="block block-source"><h2>史料原文</h2><p class="source-note" data-field="sourceNote">刘徽《九章算术注》圆田术注。这是他解释割圆术的原话。</p><blockquote data-field="sourceText">割之弥细，所失弥少。割之又割，以至于不可割，则与圆合体而无所失矣。</blockquote></section>
+                <section class="block block-modern"><h2>现代释义</h2><div data-field="modernText" data-multiline="1"><p>刘徽从圆内接正六边形开始，不断把边数加倍。边分得越细，多边形和圆之间空出的部分越少。他在注里给出圆周率 157/50，也就是 3.14，并说明还可以继续往下算。</p><p>他活动于魏晋，籍贯有不同说法，本馆不写没有把握的出生年，只采用可以核对的年代：魏景元四年（263 年）为《九章算术》作注。他还著《海岛算经》，用重差术测量不能到达的高度和距离。</p></div></section>
+                <section class="block block-demo"><h2>辅助演示</h2><p data-field="demoNote">经典馆的割圆滑块可以把边数从 6 加到 96，旁边的圆周率是现代公式算给观众看的，不是刘徽算筹上的原式。</p></section>
+                <ul class="point-list" data-field-list="points"><li>割圆术与出入相补</li><li>注《九章算术》（263 年）</li><li>《海岛算经》重差术</li></ul>
+            </div>
+        </div>
+    </article>
+    <footer class="site-foot"><a href="catalog.html">馆藏目录</a><a href="board.html">留言板</a><a href="survey.html">参观调查</a></footer>
+</main>
+<script src="js/api.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/entry.js"></script>
+<script src="js/particle.js"></script>
+</body>
+</html>

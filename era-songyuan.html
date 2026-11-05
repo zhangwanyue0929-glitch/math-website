@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <title>宋元 - 算经千年</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<header class="navbar"><a class="logo" href="index.html">算经千年</a><button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false"><span></span><span></span><span></span></button><nav aria-label="主导航"><a href="index.html">首页</a><a class="active" href="history.html">发展史</a><a href="mathematicians.html">数学家</a><a href="classics.html">数学经典</a><a href="abacus.html">算盘互动</a><a href="puzzle.html">华容道</a><a class="nav-minor" href="board.html">留言</a><a class="nav-minor" href="survey.html">调查</a><a class="nav-minor" href="login.html" data-nav-account>登录</a></nav></header>
+<main class="article-page page-pattern">
+    <p class="crumb"><a href="index.html">首页</a> / <a href="history.html">发展史</a> / <span>宋元</span></p>
+    <p id="entryStatus" class="entry-status" role="status"></p>
+    <article class="sheet" data-entry data-kind="era" data-slug="songyuan">
+        <header class="sheet-head">
+            <p class="eyebrow" data-field="subtitle">天元、四元与实用算法</p>
+            <h1 data-field="title">宋元</h1>
+            <p class="summary" data-field="summary">宋元是算法传统的高峰。秦九韶、李冶、杨辉、朱世杰分别留下同余式、天元术、实用捷法和四元术的著作。算盘也在日用计算里逐渐普及。</p>
+            <div class="sheet-actions"><button class="btn" id="favBtn" type="button">收藏此页</button><a class="btn btn-ghost" data-field-href="demoHref" href="classics.html">打开相关页面</a></div>
+        </header>
+        <div class="sheet-grid">
+            <div class="sheet-side"><div class="diagram-wrap"><p>辅助演示图</p><svg class="math-svg" viewBox="0 0 320 220" role="img" aria-label="天元地元人元物元"><circle cx="160" cy="110" r="28" fill="none" stroke="#c6a15b" stroke-width="2"/><text x="160" y="46" text-anchor="middle" fill="#8b3a32" font-size="18">天元</text><text x="160" y="196" text-anchor="middle" fill="#8b3a32" font-size="18">地元</text><text x="52" y="116" text-anchor="middle" fill="#8b3a32" font-size="18">人元</text><text x="268" y="116" text-anchor="middle" fill="#8b3a32" font-size="18">物元</text></svg></div></div>
+            <div class="sheet-body">
+                <section class="block block-source"><h2>史料原文</h2><p class="source-note" data-field="sourceNote">这里并列两位作者的原话，中间用空行分开，避免看成同一本书。</p><blockquote data-field="sourceText">秦九韶《数书九章》术文节引：置奇右上，定居右下，天元一于左上。
+
+李冶《测圆海镜》序：故谓数为难穷，斯可；谓数为不可穷，斯不可。</blockquote></section>
+                <section class="block block-modern"><h2>现代释义</h2><div data-field="modernText" data-multiline="1"><p>北方的李冶用天元术列方程，南方的秦九韶整理大衍求一术和正负开方，杨辉重视可以教、可以用的算法，朱世杰把未知数扩到四个。四个人的书不要合成“宋元数学”一句话。</p><p>算盘的普及比算筹晚。算筹是这几部书的主要计算工具，上二下五的算盘是日用场景里后起的工具。馆里的算盘页单独标明了这一点。</p></div></section>
+                <section class="block block-demo"><h2>辅助演示</h2><p data-field="demoNote">本时期没有一个演示能同时代表四部书。请从人物专题或典籍分册进入，各自的图只解释那一部书。</p></section>
+                <ul class="point-list" data-field-list="points"><li>秦九韶《数书九章》</li><li>李冶《测圆海镜》</li><li>杨辉的实用算法与朱世杰四元术</li></ul>
+            </div>
+        </div>
+    </article>
+    <footer class="site-foot"><a href="catalog.html">馆藏目录</a><a href="board.html">留言板</a><a href="survey.html">参观调查</a></footer>
+</main>
+<script src="js/api.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/entry.js"></script>
+<script src="js/particle.js"></script>
+</body>
+</html>

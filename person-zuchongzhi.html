@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <title>祖冲之 - 算经千年</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<header class="navbar"><a class="logo" href="index.html">算经千年</a><button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false"><span></span><span></span><span></span></button><nav aria-label="主导航"><a href="index.html">首页</a><a href="history.html">发展史</a><a class="active" href="mathematicians.html">数学家</a><a href="classics.html">数学经典</a><a href="abacus.html">算盘互动</a><a href="puzzle.html">华容道</a><a class="nav-minor" href="board.html">留言</a><a class="nav-minor" href="survey.html">调查</a><a class="nav-minor" href="login.html" data-nav-account>登录</a></nav></header>
+<main class="article-page page-pattern">
+    <p class="crumb"><a href="index.html">首页</a> / <a href="mathematicians.html">数学家</a> / <span>祖冲之</span></p>
+    <p id="entryStatus" class="entry-status" role="status"></p>
+    <article class="sheet" data-entry data-kind="mathematician" data-slug="zuchongzhi">
+        <header class="sheet-head">
+            <p class="eyebrow" data-field="subtitle">南北朝 · 429—500</p>
+            <h1 data-field="title">祖冲之</h1>
+            <p class="summary" data-field="summary">南北朝数学家、天文学家。史书记载他把圆周率夹在 3.1415926 与 3.1415927 之间，并给出密率 355/113、约率 22/7。</p>
+            <div class="sheet-actions"><button class="btn" id="favBtn" type="button">收藏此页</button><a class="btn btn-ghost" data-field-href="demoHref" href="classics.html#circle">打开相关页面</a></div>
+        </header>
+        <div class="sheet-grid">
+            <div class="sheet-side"><figure class="portrait"><img data-field-src="imageUrl" src="assets/images/mathematicians/zuchongzhi.jpg" alt="祖冲之"><figcaption data-field="imageCaption">后世绘制的人物画像，只帮助辨认专题，不是当时留下的写真。</figcaption></figure><div class="diagram-wrap"><p>辅助演示图</p><svg class="math-svg" viewBox="0 0 320 320" role="img" aria-label="圆内接正六边形"><circle cx="160" cy="160" r="120" fill="none" stroke="#c6a15b" stroke-width="2"/><polygon points="160,40 264,100 264,220 160,280 56,220 56,100" fill="rgba(139,58,50,0.1)" stroke="#8b3a32" stroke-width="2"/></svg></div></div>
+            <div class="sheet-body">
+                <section class="block block-source"><h2>史料原文</h2><p class="source-note" data-field="sourceNote">《隋书·律历志》备数。下面是节引，不是《缀术》原文。《缀术》已经失传。</p><blockquote data-field="sourceText">宋末，南徐州从事史祖冲之更开密法，以圆径一亿为一丈，圆周盈数三丈一尺四寸一分五厘九毫二秒七忽，朒数三丈一尺四寸一分五厘九毫二秒六忽，正数在盈朒二限之间。密率，圆径一百一十三，圆周三百五十五。约率，圆径七，周二十二。</blockquote></section>
+                <section class="block block-modern"><h2>现代释义</h2><div data-field="modernText" data-multiline="1"><p>这段话的意思是：把直径定为一丈，再分成一亿份去量圆周。盈数是偏大的一界，朒数是偏小的一界，真值夹在中间，所以今天写成 3.1415926 &lt; π &lt; 3.1415927。密率 355/113 和约率 22/7 是两个分数形式的近似。</p><p>生年有 429 与 427 两种通行说法，本馆年份取 429—500。具体是把割圆算到多少边，原文没有留下来，不能把后人的推算说成祖冲之的原话。他又编订《大明历》。儿子祖暅的“幂势既同，则积不容异”见于唐代李淳风的《九章算术》注，说的是祖暅，不要写进祖冲之名下。</p></div></section>
+                <section class="block block-demo"><h2>辅助演示</h2><p data-field="demoNote">割圆术页面用内接正多边形逼近圆周，是本馆做的辅助演示，用来看“边数变多，误差变小”。它不是《缀术》里的算图。</p></section>
+                <ul class="point-list" data-field-list="points"><li>盈朒二限：3.1415926 &lt; π &lt; 3.1415927</li><li>密率 355/113，约率 22/7</li><li>《缀术》已佚，演算步骤没有留下来</li></ul>
+            </div>
+        </div>
+    </article>
+    <footer class="site-foot"><a href="catalog.html">馆藏目录</a><a href="board.html">留言板</a><a href="survey.html">参观调查</a></footer>
+</main>
+<script src="js/api.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/entry.js"></script>
+<script src="js/particle.js"></script>
+</body>
+</html>
